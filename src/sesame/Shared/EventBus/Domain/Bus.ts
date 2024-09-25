@@ -1,4 +1,5 @@
-import type { Handler } from './Handler'
+import type { Event } from './Event'
+import type { Handler, SubscriberHandler } from './Handler'
 
 export interface Registry {
   unregister: () => void
