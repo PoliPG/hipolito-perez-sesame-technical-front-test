@@ -15,14 +15,14 @@ export class InMemoryNoReturningDataBus implements NoReturningDataBus {
   }
 
   public async dispatch(event: Event): Promise<void> {
-    const eventSuscribers = this.getSubscribers(event.getName())
+    const eventSubscribers = this.getSubscribers(event.getName())
 
-    if (eventSuscribers === undefined) {
-      throw new Error('Not suscriber found')
+    if (eventSubscribers === undefined) {
+      throw new Error('Not subscriber found')
     }
 
-    for (let i = 0; i <= eventSuscribers.length; i++) {
-      await eventSuscribers[i].handler.handle(event)
+    for (let i = 0; i <= eventSubscribers.length; i++) {
+      await eventSubscribers[i].handler.handle(event)
     }
   }
 
