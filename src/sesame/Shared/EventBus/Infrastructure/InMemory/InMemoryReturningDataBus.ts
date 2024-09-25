@@ -14,7 +14,7 @@ export class InMemoryReturningDataBus implements ReturningDataBus {
     this.subscribers = new SubscriberMap()
   }
 
-  public async dispatch<T extends object>(event: Event): Promise<T> {
+  public async dispatch<T>(event: Event): Promise<T> {
     const messageSubscribers = this.getSubscribers(event.getName())
 
     if (messageSubscribers === undefined) {
