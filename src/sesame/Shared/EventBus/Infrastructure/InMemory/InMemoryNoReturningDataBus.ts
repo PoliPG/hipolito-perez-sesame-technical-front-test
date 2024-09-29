@@ -21,7 +21,7 @@ export class InMemoryNoReturningDataBus implements NoReturningDataBus {
       throw new Error('Not subscriber found')
     }
 
-    for (let i = 0; i <= eventSubscribers.length; i++) {
+    for (let i = 0; i < eventSubscribers.length; i++) {
       await eventSubscribers[i].handler.handle(event)
     }
   }
