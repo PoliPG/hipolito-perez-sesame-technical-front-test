@@ -1,6 +1,6 @@
 import type { Handler } from '@/sesame/Shared/EventBus/Domain/Handler'
 import type { GetVacancyCandidateStatusQuery } from './GetVacancyCandidateStatusQuery'
-import type { VacancyCandidateStatusDTO } from './VacancyCandidateStatusDTO'
+import { VacancyCandidateStatusDTO } from './VacancyCandidateStatusDTO'
 import type { VacancyRepository } from '../../Domain/VacancyRepository'
 import type { VacancyCandidateStatus } from '../../Domain/VacancyCandidateStatus'
 import VacancyContainerTypes from '../../VacancyContainerTypes'
@@ -20,10 +20,10 @@ export class GetVacancyCandidateStatusQueryHandler implements Handler {
   }
 
   private getDTO(candidateStatus: VacancyCandidateStatus): VacancyCandidateStatusDTO {
-    return {
-      id: candidateStatus.id,
-      name: candidateStatus.name,
-      order: candidateStatus.order
-    }
+    return new VacancyCandidateStatusDTO(
+      candidateStatus.id,
+      candidateStatus.name,
+      candidateStatus.order
+    )
   }
 }
