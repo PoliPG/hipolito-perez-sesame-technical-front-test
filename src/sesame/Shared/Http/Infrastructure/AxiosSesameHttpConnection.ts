@@ -5,11 +5,9 @@ import axios, { type AxiosInstance, isAxiosError } from 'axios'
 export default class AxiosSesameHttpConnection implements HttpConnection {
   private httpInstance: AxiosInstance
 
-  constructor() {
-    const baseURL: string = import.meta.env.SESAME_API_URL
-    const authToken: string = import.meta.env.SESAME_API_TOKEN
+  constructor(baseURL: string, authToken: string) {
     this.httpInstance = axios.create({
-      baseURL: `${baseURL}/api/`,
+      baseURL: `${baseURL}`,
       headers: { Authorization: `Bearer ${authToken}` }
     })
   }
