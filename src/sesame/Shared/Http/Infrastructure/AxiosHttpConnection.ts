@@ -13,10 +13,7 @@ export default class AxiosHttpConnection implements HttpConnection {
   }
 
   /**
-   * Obtiene datos de la API de Strapi.
-   * @param endpoint - El endpoint para realizar la consulta
-   * @param query - Los parámetros de consulta para agregar a la URL
-   * @returns
+   * Get data
    */
   async get<T>(endpoint: string, query?: Record<string, string>): Promise<T> {
     try {
@@ -29,9 +26,7 @@ export default class AxiosHttpConnection implements HttpConnection {
   }
 
   /**
-   * @param endpoint - El endpoint para realizar la consulta
-   * @param query - Los parámetros de consulta para agregar a la URL
-   * @returns
+   * Post data
    */
   async post<T, B>(endpoint: string, body: B): Promise<T> {
     try {
@@ -44,9 +39,7 @@ export default class AxiosHttpConnection implements HttpConnection {
   }
 
   /**
-   * @param endpoint - El endpoint para realizar la consulta
-   * @param query - Los parámetros de consulta para agregar a la URL
-   * @returns
+   * Put data
    */
   async put<T, B>(endpoint: string, body: B): Promise<T> {
     try {
