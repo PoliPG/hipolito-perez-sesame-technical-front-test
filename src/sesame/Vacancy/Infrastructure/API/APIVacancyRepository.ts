@@ -1,9 +1,9 @@
 import type { HttpConnection } from '@/sesame/Shared/Http/Domain/HttpConnection'
 import type { APIDTO } from '@/sesame/Shared/Http/Infrastructure/APIDTO'
 import type { VacancyRepository } from '../../Domain/VacancyRepository'
-import { APIMapperVacancyState } from './DTO/APIMapperVacancyState'
-import type { APIVacancyStateDTO } from './DTO/APIVacancyStateDTO'
-import type { VacancyState } from '../../Domain/VacancyState'
+import { APIMapperVacancyCandidateStatus } from './DTO/APIMapperVacancyCandidateStatus'
+import type { APIVacancyCandidateStatusDTO } from './DTO/APIVacancyCandidateStatusDTO'
+import type { VacancyCandidateStatus } from '../../Domain/VacancyCandidateStatus'
 import { injectable } from 'inversify'
 
 @injectable()
@@ -13,11 +13,11 @@ export class APIVacancyRepository implements VacancyRepository {
   /**
    * Find states for a concrete vacancy
    */
-  async findVacancyStates(vacancyID: number): Promise<VacancyState[]> {
+  async findCandidateStatusByVacancy(vacancyID: number): Promise<VacancyCandidateStatus[]> {
     const url = `/recruitment/v1/candidate-status/${vacancyID}`
-    const apiCandidates = await this.httpConnection.get<APIDTO<APIVacancyStateDTO[]>>(url)
+    const apiCandidates = await this.httpConnection.get<APIDTO<APIVacancyCandidateStatusDTO[]>>(url)
 
     if (apiCandidates.data.length === 0) return []
-    return apiCandidates.data.map((dto) => APIMapperVacancyState.createFromDTO(dto))
+    return apiCandidates.data.map((dto) => APIMapperVacancyCandidateStatus.createFromDTO(dto))
   }
 }

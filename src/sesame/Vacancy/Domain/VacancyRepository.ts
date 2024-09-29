@@ -1,5 +1,5 @@
-import type { VacancyState } from './VacancyState'
+import type { VacancyCandidateStatus } from './VacancyCandidateStatus'
 
 export interface VacancyRepository {
-  findVacancyStates(vacancyID: number): Promise<VacancyState[]>
+  findCandidateStatusByVacancy(vacancyID: number): Promise<VacancyCandidateStatus[]>
 }

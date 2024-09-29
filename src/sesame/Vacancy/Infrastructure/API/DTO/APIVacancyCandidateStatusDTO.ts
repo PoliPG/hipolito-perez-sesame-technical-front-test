@@ -1,4 +1,4 @@
-export interface APIVacancyStateDTO {
+export interface APIVacancyCandidateStatusDTO {
   id: string
   name: string
   order: number

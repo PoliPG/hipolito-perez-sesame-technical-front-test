@@ -1,4 +1,4 @@
-export class VacancyState {
+export class VacancyCandidateStatus {
   private _id: string
   private _name: string
   private _order: number
