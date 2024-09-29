@@ -1,5 +1,6 @@
 import { Container as InversifyContainer } from 'inversify'
 import type { ContainerModule } from './ContainerModule'
+import { VacancyContainerModule } from '@/sesame/Vacancy/VacancyContainerModule'
 
 class IocContainer extends InversifyContainer {
   private static instance: IocContainer | null = null
@@ -7,7 +8,7 @@ class IocContainer extends InversifyContainer {
 
   constructor() {
     super()
-    this.modules = []
+    this.modules = [new VacancyContainerModule()]
 
     this.load(...this.modules)
     this.modules.forEach((module) => {
