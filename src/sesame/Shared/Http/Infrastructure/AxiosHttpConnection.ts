@@ -2,7 +2,7 @@ import type { HttpConnection } from '../Domain/HttpConnection'
 import { HttpError } from '../Domain/Errors/HttpError'
 import axios, { type AxiosInstance, isAxiosError } from 'axios'
 
-export default class AxiosSesameHttpConnection implements HttpConnection {
+export default class AxiosHttpConnection implements HttpConnection {
   private httpInstance: AxiosInstance
 
   constructor(baseURL: string, authToken: string) {
