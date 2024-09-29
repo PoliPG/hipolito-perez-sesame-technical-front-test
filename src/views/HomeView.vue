@@ -12,7 +12,7 @@ const candidateStatus = await queryBus.dispatch<VacancyCandidateStatusDTO[]>(que
 <template>
   <main>
     <div v-for="candidateState in candidateStatus" :key="candidateState.id">
-      {{ candidateState.name }}
+      <span class="px-2 font-bold">{{ candidateState.name }}</span>
     </div>
   </main>
 </template>
