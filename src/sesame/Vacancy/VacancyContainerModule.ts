@@ -15,7 +15,6 @@ export class VacancyContainerModule extends ContainerModule {
   constructor() {
     super((bind: interfaces.Bind) => {
       // Set environment data
-
       const sesameUrl: string = import.meta.env.VITE_SESAME_API_URL
       const apiToken: string = import.meta.env.VITE_SESAME_API_TOKEN
       const sesameHttpConnection = new AxiosHttpConnection(sesameUrl, apiToken)
