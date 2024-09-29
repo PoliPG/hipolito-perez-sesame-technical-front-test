@@ -13,7 +13,7 @@ export class APIVacancyRepository implements VacancyRepository {
   /**
    * Find states for a concrete vacancy
    */
-  async findCandidateStatusByVacancy(vacancyID: number): Promise<VacancyCandidateStatus[]> {
+  async findCandidateStatusByVacancy(vacancyID: string): Promise<VacancyCandidateStatus[]> {
     const url = `/recruitment/v1/candidate-status/${vacancyID}`
     const apiCandidates = await this.httpConnection.get<APIDTO<APIVacancyCandidateStatusDTO[]>>(url)
 
