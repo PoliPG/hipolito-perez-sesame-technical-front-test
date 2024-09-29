@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Atitle from '@/components/Title/ATitle.vue'
 import { QueryBusKey } from '@/sesame/Shared/EventBus/Infrastructure/Vue/EventBusPlugin'
 import { GetVacancyCandidateStatusQuery } from '@/sesame/Vacancy/Application/get-vacancy-candidate-status/GetVacancyCandidateStatusQuery'
 import { VacancyCandidateStatusDTO } from '@/sesame/Vacancy/Application/get-vacancy-candidate-status/VacancyCandidateStatusDTO'
@@ -11,6 +12,7 @@ const candidateStatus = await queryBus.dispatch<VacancyCandidateStatusDTO[]>(que
 
 <template>
   <main>
+    <Atitle text="Reclutamiento" />
     <div v-for="candidateState in candidateStatus" :key="candidateState.id">
       <span class="px-2 font-bold">{{ candidateState.name }}</span>
     </div>

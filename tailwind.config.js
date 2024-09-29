@@ -3,7 +3,16 @@ export default {
   purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   content: [],
   theme: {
-    extend: {}
+    extend: {
+      colors: {
+        sesameBlue: {
+          900: '#1F2D52'
+        }
+      },
+      fontFamily: {
+        figtree: ['Figtree', 'sans-serif']
+      }
+    }
   },
   plugins: []
 }
