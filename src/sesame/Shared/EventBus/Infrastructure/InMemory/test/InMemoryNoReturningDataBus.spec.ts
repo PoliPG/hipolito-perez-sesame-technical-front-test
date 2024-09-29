@@ -1,20 +1,21 @@
 // sum.test.js
 import 'reflect-metadata'
 import { expect, test } from 'vitest'
-import { InMemoryReturningDataBus } from '../InMemoryReturningDataBus'
+import { InMemoryNoReturningDataBus } from '../InMemoryNoReturningDataBus'
 import { TestEvent } from './TestEvent'
 import { TestHandler } from './TestHandler'
+import { EntityTest } from './EntityTest'
 
 test('Test basic event', async () => {
   //Arrange
   const event = new TestEvent('Holaa')
   const handler = new TestHandler()
-  const bus = new InMemoryReturningDataBus()
+  const bus = new InMemoryNoReturningDataBus()
   bus.register(TestEvent.name, handler)
 
   //Act
-  const test = await bus.dispatch<string>(event)
+  await bus.dispatch(event)
 
   //Assert
-  expect(test).toBe(event.text)
+  expect(EntityTest.text).toBe('testing')
 })
