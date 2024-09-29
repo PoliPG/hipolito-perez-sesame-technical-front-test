@@ -1,4 +1,5 @@
 import type { HttpConnection } from '@/sesame/Shared/Http/Domain/HttpConnection'
+import type { APIDTO } from '@/sesame/Shared/Http/Infrastructure/APIDTO'
 import type { VacancyRepository } from '../../Domain/VacancyRepository'
 import { APIMapperVacancyState } from './DTO/APIMapperVacancyState'
 import type { APIVacancyStateDTO } from './DTO/APIVacancyStateDTO'
@@ -14,9 +15,9 @@ export class APIVacancyRepository implements VacancyRepository {
    */
   async findVacancyStates(vacancyID: number): Promise<VacancyState[]> {
     const url = `/recruitment/v1/candidate-status/${vacancyID}`
-    const apiCandidates = await this.httpConnection.get<APIVacancyStateDTO[]>(url)
+    const apiCandidates = await this.httpConnection.get<APIDTO<APIVacancyStateDTO[]>>(url)
 
-    if (apiCandidates.length === 0) return []
-    return apiCandidates.map((dto) => APIMapperVacancyState.createFromDTO(dto))
+    if (apiCandidates.data.length === 0) return []
+    return apiCandidates.data.map((dto) => APIMapperVacancyState.createFromDTO(dto))
   }
 }
