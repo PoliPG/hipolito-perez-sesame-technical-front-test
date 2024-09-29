@@ -3,9 +3,14 @@ import type { GetVacancyCandidateStatusQuery } from './GetVacancyCandidateStatus
 import type { VacancyCandidateStatusDTO } from './VacancyCandidateStatusDTO'
 import type { VacancyRepository } from '../../Domain/VacancyRepository'
 import type { VacancyCandidateStatus } from '../../Domain/VacancyCandidateStatus'
+import VacancyContainerTypes from '../../VacancyContainerTypes'
+import { inject, injectable } from 'inversify'
 
+@injectable()
 export class GetVacancyCandidateStatusQueryHandler implements Handler {
-  constructor(private vacancyRepository: VacancyRepository) {}
+  constructor(
+    @inject(VacancyContainerTypes.VacancyRepository) private vacancyRepository: VacancyRepository
+  ) {}
 
   async handle(query: GetVacancyCandidateStatusQuery): Promise<VacancyCandidateStatusDTO[]> {
     const candidateStatus = await this.vacancyRepository.findCandidateStatusByVacancy(
