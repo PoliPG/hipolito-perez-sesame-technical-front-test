@@ -3,8 +3,8 @@ import type { ContainerModule } from './ContainerModule'
 import { VacancyContainerModule } from '@/sesame/Vacancy/VacancyContainerModule'
 
 class IocContainer extends InversifyContainer {
-  private static instance: IocContainer | null = null
-  private modules: ContainerModule[] = []
+  private static instance: IocContainer | null
+  private modules: ContainerModule[]
 
   constructor() {
     super()
