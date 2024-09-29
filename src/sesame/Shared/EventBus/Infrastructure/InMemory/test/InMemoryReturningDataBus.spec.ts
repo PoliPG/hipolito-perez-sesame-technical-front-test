@@ -1,4 +1,3 @@
-// sum.test.js
 import 'reflect-metadata'
 import { expect, test } from 'vitest'
 import { InMemoryReturningDataBus } from '../InMemoryReturningDataBus'

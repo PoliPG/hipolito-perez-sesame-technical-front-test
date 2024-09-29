@@ -1,13 +1,15 @@
 import { Container as InversifyContainer } from 'inversify'
 import type { ContainerModule } from './ContainerModule'
+import { VacancyContainerModule } from '@/sesame/Vacancy/VacancyContainerModule'
+import { EventBusContainerModule } from '../../EventBus/EventBusContainerModule'
 
 class IocContainer extends InversifyContainer {
-  private static instance: IocContainer | null = null
-  private modules: ContainerModule[] = []
+  private static instance: IocContainer
+  private modules: ContainerModule[]
 
-  constructor() {
+  private constructor() {
     super()
-    this.modules = []
+    this.modules = [new EventBusContainerModule(), new VacancyContainerModule()]
 
     this.load(...this.modules)
     this.modules.forEach((module) => {
@@ -16,7 +18,7 @@ class IocContainer extends InversifyContainer {
   }
 
   static getInstance(): IocContainer {
-    if (IocContainer.instance !== null) return IocContainer.instance
+    if (typeof IocContainer.instance !== 'undefined') return IocContainer.instance
     IocContainer.instance = new IocContainer()
     return IocContainer.instance
   }
