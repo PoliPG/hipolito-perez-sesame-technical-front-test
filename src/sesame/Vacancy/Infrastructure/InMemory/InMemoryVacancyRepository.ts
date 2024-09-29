@@ -71,7 +71,7 @@ export class InMemoryVacancyRepository implements VacancyRepository {
         companyId: '7ae449bc-620c-4851-9d56-d25ff4094e34',
         createdAt: '2024-09-24T13:38:08+00:00',
         updatedAt: '2024-09-24T13:38:08+00:00',
-        vacancyId: 'c762067e-de1e-4706-9649-accad9dacb1b'
+        vacancyId: 'c762067e-de1e-4706-9649-accad9dacb1a'
       }
     ]
   }
