@@ -4,6 +4,6 @@ import { RouterView } from 'vue-router'
 
 <template>
   <Suspense>
-    <RouterView class="font-figtree" />
+    <RouterView class="bg-gray-50 min-h-svh font-figtree" />
   </Suspense>
 </template>

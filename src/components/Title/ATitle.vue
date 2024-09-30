@@ -1,9 +1,10 @@
 <script setup lang="ts">
-const props = defineProps({
-  text: { type: String, required: true }
-})
+interface Props {
+  text: string
+}
+const { text } = defineProps<Props>()
 </script>
 
 <template>
-  <h1 class="font-bold text-3xl text-sesameBlue-900">{{ props.text }}</h1>
+  <h1 class="font-bold text-3xl text-sesameBlue-900">{{ text }}</h1>
 </template>

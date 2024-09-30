@@ -7,6 +7,9 @@ export default {
       colors: {
         sesameBlue: {
           900: '#1F2D52'
+        },
+        gray: {
+          10: '#F8FAFC'
         }
       },
       fontFamily: {
