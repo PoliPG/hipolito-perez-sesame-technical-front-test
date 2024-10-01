@@ -1,0 +1,44 @@
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import ATab from './ATab.vue'
+
+interface TabDTO {
+  id: string
+  default?: boolean
+}
+
+interface Props {
+  tabs: TabDTO[]
+}
+
+const { tabs } = defineProps<Props>()
+
+const activeTab = ref('')
+
+onMounted(() => {
+  const defaultTab = tabs.find((tab) => tab.default === true)
+  if (defaultTab) activeTab.value = defaultTab.id
+})
+
+function setActiveTab(id: string): void {
+  activeTab.value = id
+}
+</script>
+
+<template>
+  <menu class="flex items-center gap-3 border-gray-200 mb-4 border-b">
+    <ATab
+      :id="tab.id"
+      :active-id="activeTab"
+      v-for="tab in tabs"
+      :key="tab.id"
+      @click="setActiveTab"
+    >
+      <slot :name="tab.id"></slot>
+    </ATab>
+    <slot name="tabs"></slot>
+  </menu>
+  <div>
+    <slot name="content" :active-tab="activeTab"></slot>
+  </div>
+</template>
