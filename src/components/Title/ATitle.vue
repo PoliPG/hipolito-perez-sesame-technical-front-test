@@ -6,5 +6,5 @@ const { text } = defineProps<Props>()
 </script>
 
 <template>
-  <h1 class="font-bold text-3xl text-sesameBlue-900">{{ text }}</h1>
+  <h1 class="font-bold text-3xl text-turquoise-900">{{ text }}</h1>
 </template>

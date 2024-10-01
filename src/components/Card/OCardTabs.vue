@@ -1,5 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ATab from '../Tab/ATab.vue'
+import OCard from './OCard.vue'
+</script>
 
 <template>
-  <div class="shadow-gray-200 shadow-sm p-4 border rounded-xl lg:rounded-3xl min-h-10">hola</div>
+  <OCard>
+    <menu>
+      <ATab id="vacancies">Vacantes</ATab>
+      <ATab id="candidates">Candidatos</ATab>
+    </menu>
+  </OCard>
 </template>

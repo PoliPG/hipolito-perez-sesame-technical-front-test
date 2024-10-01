@@ -5,7 +5,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        sesameBlue: {
+        turquoise: {
+          200: '#6C63FF',
           900: '#1F2D52'
         },
         gray: {
