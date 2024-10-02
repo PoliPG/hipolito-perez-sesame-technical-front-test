@@ -26,7 +26,7 @@ function setActiveTab(id: string): void {
 </script>
 
 <template>
-  <menu class="flex items-center gap-3 border-gray-200 mb-4 border-b">
+  <menu class="flex items-center gap-5 border-gray-200 mb-4 border-b">
     <ATab
       :id="tab.id"
       :active-id="activeTab"

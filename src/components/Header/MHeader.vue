@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AAvatar from '../Avatar/AAvatar.vue'
-import AMenuIcon from '../Icons/AMenuIcon.vue'
+import AIcon from '../Icons/AIcon.vue'
 import ATitle from '../Title/ATitle.vue'
 
 const emit = defineEmits(['open-menu'])
@@ -13,7 +13,7 @@ function openMenu(): void {
 <template>
   <header class="flex justify-between items-center p-3">
     <div class="flex items-center gap-2">
-      <AMenuIcon @click="openMenu" />
+      <AIcon icon="menu" @click="openMenu" />
       <ATitle text="Reclutamiento" />
     </div>
     <AAvatar

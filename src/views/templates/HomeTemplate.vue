@@ -3,6 +3,7 @@ import type { VacancyCandidateStatusDTO } from '@/sesame/Vacancy/Application/get
 import MHeader from '@/components/Header/MHeader.vue'
 import OCard from '@/components/Card/OCard.vue'
 import MTabs from '@/components/Tab/MTabs.vue'
+import OMenu from '@/components/Menu/OMenu.vue'
 
 interface Props {
   candidateStatus: VacancyCandidateStatusDTO[]
@@ -12,20 +13,23 @@ const { candidateStatus } = defineProps<Props>()
 
 <template>
   <main class="px-2">
+    <OMenu />
     <MHeader class="mb-2" />
     <OCard class="mb-2">
-      <MTabs :tabs="[{ id: 'vacancies', default: true }, { id: 'candidates' }]">
-        <template #vacancies>Vacantes</template>
-        <template #candidates>Candidatos</template>
-        <template #content="{ activeTab }">
-          <div v-if="activeTab === 'vacancies'">
-            <div v-for="candidateState in candidateStatus" :key="candidateState.id">
-              <span class="px-2 font-bold">{{ candidateState.name }}</span>
+      <div class="-mt-2">
+        <MTabs :tabs="[{ id: 'vacancies', default: true }, { id: 'candidates' }]">
+          <template #vacancies>Vacantes</template>
+          <template #candidates>Candidatos</template>
+          <template #content="{ activeTab }">
+            <div v-if="activeTab === 'vacancies'">
+              <div v-for="candidateState in candidateStatus" :key="candidateState.id">
+                <span class="px-2 font-bold">{{ candidateState.name }}</span>
+              </div>
             </div>
-          </div>
-          <div v-else-if="activeTab === 'candidates'">Candidatos</div>
-        </template>
-      </MTabs>
+            <div v-else-if="activeTab === 'candidates'">Candidatos</div>
+          </template>
+        </MTabs>
+      </div>
     </OCard>
   </main>
 </template>
