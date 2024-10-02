@@ -4,27 +4,27 @@ import OMenuItem from './OMenuItem.vue'
 
 const menuData: MenuItem[] = [
   {
-    text: 'ADMINISTRADOR',
+    name: 'Administrador',
     items: [
       {
         icon: 'star',
-        text: 'Talento',
+        name: 'Talento',
         items: [
           {
-            text: 'Reclutamiento'
+            name: 'Reclutamiento'
           }
         ]
       }
     ]
   },
   {
-    text: 'Fichaje'
+    name: 'Fichaje'
   }
 ]
 </script>
 
 <template>
-  <div>
-    <OMenuItem :items="menuData" active="Reclutamiento"></OMenuItem>
+  <div class="bg-white">
+    <OMenuItem class="px-2 py-3" :items="menuData" item-active="Reclutamiento"></OMenuItem>
   </div>
 </template>

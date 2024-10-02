@@ -11,9 +11,9 @@ function openMenu(): void {
 </script>
 
 <template>
-  <header class="flex justify-between items-center p-3">
+  <header class="flex justify-between items-center px-3 md:px-0 py-3">
     <div class="flex items-center gap-2">
-      <AIcon icon="menu" @click="openMenu" />
+      <AIcon class="md:hidden" icon="menu" @click="openMenu" />
       <ATitle text="Reclutamiento" />
     </div>
     <AAvatar

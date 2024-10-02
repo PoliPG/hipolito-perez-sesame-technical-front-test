@@ -1,28 +1,46 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import AIcon from '../Icons/AIcon.vue'
+import AIcon, { type Icons } from '../Icons/AIcon.vue'
 
 export interface Props {
-  icon?: string
-  text: string
-  active: string
+  icon?: Icons
+  name: string
+  itemActive: string
+  level: number
 }
 
-const { icon, text, active } = defineProps<Props>()
+const { icon, name, itemActive, level } = defineProps<Props>()
 
 const isActive = computed(() => {
-  return text === active
+  return name === itemActive
 })
 </script>
 
 <template>
   <div
-    class="flex items-center gap-2 font-semibold text-sm leading-[17.5px]"
-    :class="{
-      'pl-4 border-turquoise-200 border-l-2 text-turquoise-200': isActive
-    }"
+    class="flex items-center gap-2 text-sm leading-[17.5px]"
+    :class="[
+      {
+        active: isActive
+      },
+      `level${level}`
+    ]"
   >
     <AIcon :width="14" :height="14" v-if="icon" :icon="icon" />
-    <spa>{{ text }}</spa>
+    <span>{{ name }}</span>
   </div>
 </template>
+
+<style lang="postcss" scoped>
+.active {
+  @apply pl-4 border-turquoise-200 border-l-2 text-turquoise-200;
+}
+
+.level0 {
+  @apply uppercase text-xs;
+}
+
+.level2 {
+  @apply font-semibold;
+}
+</style>

@@ -23,8 +23,11 @@ function onClick(): void {
     :tabindex="0"
     :data-id="id"
     @click="onClick"
-    class="border-white py-2 border-b-2 font-bold text-center text-turquoise-200 leading-6 cursor-pointer"
-    :class="{ 'border-b-2 border-b-turquoise-200': isActive }"
+    class="border-white py-2 border-b-2 text-center leading-6 cursor-pointer"
+    :class="{
+      'border-b-2 border-b-turquoise-200 text-turquoise-200 font-bold': isActive,
+      'text-[#E2E8F0]': !isActive
+    }"
   >
     <slot></slot>
   </li>

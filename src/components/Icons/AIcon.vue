@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { defineAsyncComponent, shallowRef, type Component } from 'vue'
 
+export type Icons = 'menu' | 'star'
+
 interface Props {
-  icon: string
+  icon: Icons
   height?: number
   width?: number
 }
@@ -11,7 +13,7 @@ const { icon, height = 14, width = 14 } = defineProps<Props>()
 
 //Data
 let currentIcon = shallowRef<Component | null>(null)
-const iconMap = new Map<string, Component>()
+const iconMap = new Map<Icons, Component>()
 iconMap.set(
   'menu',
   defineAsyncComponent(() => import('./AMenuIcon.vue'))
