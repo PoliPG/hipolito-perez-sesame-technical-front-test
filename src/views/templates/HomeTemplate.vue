@@ -13,7 +13,7 @@ const { candidateStatus } = defineProps<Props>()
 
 <template>
   <main class="md:flex mx-auto px-2 max-w-7xl">
-    <OMenu class="w-64 min-h-svh" />
+    <OMenu class="md:block hidden w-64 min-h-svh" />
     <div class="md:flex-grow md:px-8">
       <MHeader class="mb-2" />
       <OCard class="mb-2">

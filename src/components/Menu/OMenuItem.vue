@@ -17,10 +17,6 @@ export interface Props {
 
 const { items, itemActive, level = 0 } = defineProps<Props>()
 
-const isActive = computed(() => {
-  return findActiveChild(items)
-})
-
 function findActiveChild(items: MenuItem[]): boolean {
   for (let i = 0; i < items.length; i++) {
     const item = items[i]
@@ -35,12 +31,15 @@ function findActiveChild(items: MenuItem[]): boolean {
 </script>
 
 <template>
-  <nav class="rounded-lg">
+  <nav class="flex flex-col gap-2 rounded-lg">
     <li
       v-for="(item, key) in items"
       :key="key"
-      class="p-2 list-none"
-      :class="{ 'bg-gray-10': isActive }"
+      class="px-2 py-1 list-none"
+      :class="{
+        'bg-gray-100 text-turquoise-200 rounded-lg':
+          item.items && findActiveChild(item.items) && level > 0
+      }"
     >
       <AMenuItem
         :name="item.name"

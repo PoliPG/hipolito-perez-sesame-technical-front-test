@@ -18,7 +18,7 @@ const isActive = computed(() => {
 
 <template>
   <div
-    class="flex items-center gap-2 text-sm leading-[17.5px]"
+    class="flex items-center gap-2 px-1 py-1.5 text-sm leading-5 cursor-pointer"
     :class="[
       {
         active: isActive
