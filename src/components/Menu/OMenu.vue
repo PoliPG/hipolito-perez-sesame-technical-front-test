@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import type { MenuItem } from './OMenuItem.vue'
 import OMenuItem from './OMenuItem.vue'
+
+const activeItem = ref('Reclutamiento')
 
 const menuData: MenuItem[] = [
   {
@@ -18,6 +21,10 @@ const menuData: MenuItem[] = [
     ]
   }
 ]
+
+function changeActive(name: string) {
+  activeItem.value = name
+}
 </script>
 
 <template>
@@ -27,6 +34,10 @@ const menuData: MenuItem[] = [
     >
       <span>Slot logo</span>
     </div>
-    <OMenuItem class="py-3" :items="menuData" item-active="Reclutamiento"></OMenuItem>
+    <menu class="overflow-hidden">
+      <li v-for="(item, key) in menuData" :key="key" class="px-2 py-4 list-none">
+        <OMenuItem :item="item" :active-item="activeItem" @change-active="changeActive" />
+      </li>
+    </menu>
   </div>
 </template>

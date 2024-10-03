@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { defineAsyncComponent, shallowRef, type Component } from 'vue'
 
-export type Icons = 'menu' | 'star'
+export type Icons = 'menu' | 'star' | 'chevron'
 
 interface Props {
   icon: Icons
@@ -22,12 +22,16 @@ iconMap.set(
   'star',
   defineAsyncComponent(() => import('./AStarIcon.vue'))
 )
+iconMap.set(
+  'chevron',
+  defineAsyncComponent(() => import('./AChevron.vue'))
+)
 
 currentIcon.value = (await iconMap.get(icon)) ?? null
 </script>
 
 <template>
-  <i v-if="currentIcon">
+  <i v-if="currentIcon" :class="`i-${icon}`">
     <component :is="currentIcon" :height="height" :width="width" />
   </i>
 </template>
