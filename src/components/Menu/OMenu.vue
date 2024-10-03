@@ -15,6 +15,12 @@ const menuData: MenuItem[] = [
         items: [
           {
             name: 'Reclutamiento'
+          },
+          {
+            name: 'Asistencias'
+          },
+          {
+            name: 'Ausencias'
           }
         ]
       }

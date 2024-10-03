@@ -32,7 +32,7 @@ function toggleMenu() {
 
 <template>
   <div
-    class="flex items-center gap-2 px-1 py-1.5 w-full text-sm leading-5 cursor-pointer select-none"
+    class="flex items-center gap-2 px-1 w-full text-sm leading-5 cursor-pointer select-none"
     :class="[
       {
         active: isActive
@@ -44,7 +44,7 @@ function toggleMenu() {
     <AIcon :width="14" :height="14" v-if="icon" :icon="icon" />
     <span class="flex-grow truncate">{{ name }}</span>
     <AIcon
-      class="transform transition-transform duration-500"
+      class="text-current text-gray-500 transform transition-transform duration-500"
       :width="16"
       :height="16"
       v-if="showOpener"
@@ -54,13 +54,18 @@ function toggleMenu() {
 </template>
 
 <style lang="postcss" scoped>
+.level0,
+.level1 {
+  @apply py-1.5;
+}
+
 .level2 {
-  @apply pl-4 font-semibold border-l-2;
+  @apply pl-4 font-semibold border-l-2 py-1;
 }
 
 :not(.active) {
   & > .i-chevron {
-    @apply rotate-180 transition-transform duration-500;
+    @apply rotate-180 transition-transform duration-500 text-gray-500;
   }
 
   &.level2 {
@@ -69,8 +74,12 @@ function toggleMenu() {
 }
 
 .active {
+  @apply text-turquoise-200;
+
   &.level1 {
-    @apply text-turquoise-200;
+    & > span {
+      @apply text-turquoise-200;
+    }
   }
 
   &.level2 {

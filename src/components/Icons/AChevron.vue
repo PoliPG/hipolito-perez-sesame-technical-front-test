@@ -15,6 +15,11 @@ const { height = 20, width = 20 } = defineProps<Props>()
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <path d="M12 10L8 6L4 10" stroke="#6C63FF" stroke-linecap="round" stroke-linejoin="round" />
+    <path
+      d="M12 10L8 6L4 10"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
   </svg>
 </template>

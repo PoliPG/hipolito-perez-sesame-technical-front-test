@@ -68,7 +68,7 @@ function openSubMenu(name: string) {
           :key="key"
           class="px-2 py-1 list-none"
           :class="{
-            'bg-gray-100 text-turquoise-200 rounded-lg': areChildrenActive
+            'bg-gray-10 rounded-lg': areChildrenActive
           }"
         >
           <OMenuItem
