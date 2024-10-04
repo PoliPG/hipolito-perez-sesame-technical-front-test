@@ -21,7 +21,7 @@ const containerTest = test.extend({
   container: container
 })
 
-containerTest('Test use case get vacancy candidate status', async () => {
+containerTest('Test use case get vacancy candidate status', async ({ container }) => {
   //Arrange
   const query = new GetVacancyCandidateStatusQuery('c762067e-de1e-4706-9649-accad9dacb1b')
   const queryHandler = container.get<GetVacancyCandidateStatusQueryHandler>(
@@ -35,7 +35,7 @@ containerTest('Test use case get vacancy candidate status', async () => {
   expect(candidateStatus[0] instanceof VacancyCandidateStatusDTO).toBe(true)
 })
 
-containerTest('Test use case get vacancy candidate status use vacancyID', async () => {
+containerTest('Test use case get vacancy candidate status use vacancyID', async ({ container }) => {
   //Arrange
   const query = new GetVacancyCandidateStatusQuery('c762067e-de1e-4706-9649-accad9dacb1b')
   const queryHandler = container.get<GetVacancyCandidateStatusQueryHandler>(
