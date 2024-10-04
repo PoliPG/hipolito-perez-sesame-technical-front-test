@@ -35,6 +35,7 @@ function toggleMenu() {
 
 <template>
   <div
+    :data-menu-item-name="name"
     class="flex items-center gap-2 px-1 w-full text-sm leading-5 cursor-pointer select-none"
     :class="[
       {
