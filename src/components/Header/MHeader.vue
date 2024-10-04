@@ -3,17 +3,17 @@ import AAvatar from '../Avatar/AAvatar.vue'
 import AIcon from '../Icons/AIcon.vue'
 import ATitle from '../Title/ATitle.vue'
 
-const emit = defineEmits(['open-menu'])
+const emit = defineEmits(['toggle-menu'])
 
-function openMenu(): void {
-  emit('open-menu')
+function toggleMenu(): void {
+  emit('toggle-menu')
 }
 </script>
 
 <template>
   <header class="flex justify-between items-center px-3 md:px-0 py-3">
     <div class="flex items-center gap-2">
-      <AIcon class="md:hidden" icon="menu" @click="openMenu" />
+      <AIcon class="md:hidden" icon="menu" @click="toggleMenu" />
       <ATitle text="Reclutamiento" />
     </div>
     <AAvatar
