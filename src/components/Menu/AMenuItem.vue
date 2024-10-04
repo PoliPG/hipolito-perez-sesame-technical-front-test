@@ -67,8 +67,8 @@ function toggleMenu() {
   @apply pl-4 font-semibold border-l-2 py-1 ml-1;
 }
 
-:not(.active) {
-  & > .i-chevron {
+div {
+  .i-chevron {
     @apply rotate-180 transition-transform duration-500 text-gray-500;
   }
 
@@ -77,17 +77,20 @@ function toggleMenu() {
   }
 }
 
-.active {
-  @apply text-turquoise-200;
-
+div.active {
   &.level1 {
-    & > span {
+    @apply text-turquoise-200;
+    & > .i-chevron {
       @apply text-turquoise-200;
     }
   }
 
   &.level2 {
     @apply text-turquoise-200 border-turquoise-200;
+  }
+
+  .i-chevron {
+    @apply rotate-0 transition-transform duration-500;
   }
 }
 
