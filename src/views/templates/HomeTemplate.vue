@@ -39,19 +39,17 @@ function toggleMenu(): void {
 <template>
   <main class="md:flex mx-auto px-2 max-w-7xl">
     <div
-      v-show="isMenuOpen"
-      class="md:block fixed inset-0 bg-gray-600 bg-opacity-60"
+      :class="{ hidden: !isMenuOpen }"
+      class="md:block md:relative fixed inset-0 bg-gray-600 bg-opacity-60 menu"
       @click="toggleMenu"
     >
-      <Transition>
-        <OMenu
-          v-if="isMenuOpen"
-          :items="menuData"
-          default-item="Reclutamiento"
-          class="w-64 min-h-svh"
-          @click.prevent.stop
-        />
-      </Transition>
+      <OMenu
+        :items="menuData"
+        default-item="Reclutamiento"
+        class="md:block w-64 min-h-svh"
+        :class="{ hidden: !isMenuOpen }"
+        @click.prevent.stop
+      />
     </div>
 
     <div class="md:flex-grow md:px-8">
@@ -77,14 +75,7 @@ function toggleMenu(): void {
 </template>
 
 <style lang="css" scoped>
-.v-enter-active,
-.v-leave-active {
+.menu {
   transition: all 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-  transform: translateX(-50px);
 }
 </style>
