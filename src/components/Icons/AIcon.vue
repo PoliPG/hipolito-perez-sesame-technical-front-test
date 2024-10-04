@@ -27,7 +27,7 @@ iconMap.set(
   defineAsyncComponent(() => import('./AChevron.vue'))
 )
 
-currentIcon.value = (await iconMap.get(icon)) ?? null
+currentIcon.value = iconMap.get(icon) ?? null
 </script>
 
 <template>
