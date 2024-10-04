@@ -4,16 +4,40 @@ import MHeader from '@/components/Header/MHeader.vue'
 import OCard from '@/components/Card/OCard.vue'
 import MTabs from '@/components/Tab/MTabs.vue'
 import OMenu from '@/components/Menu/OMenu.vue'
+import type { MenuItem } from '@/components/Menu/OMenuItem.vue'
 
 interface Props {
   candidateStatus: VacancyCandidateStatusDTO[]
 }
 const { candidateStatus } = defineProps<Props>()
+
+const menuData: MenuItem[] = [
+  {
+    name: 'Administrador',
+    items: [
+      {
+        icon: 'star',
+        name: 'Talento',
+        items: [
+          {
+            name: 'Reclutamiento'
+          },
+          {
+            name: 'Asistencias'
+          },
+          {
+            name: 'Ausencias'
+          }
+        ]
+      }
+    ]
+  }
+]
 </script>
 
 <template>
   <main class="md:flex mx-auto px-2 max-w-7xl">
-    <OMenu class="md:block hidden w-64 min-h-svh" />
+    <OMenu :items="menuData" default-item="Reclutamiento" class="md:block hidden w-64 min-h-svh" />
     <div class="md:flex-grow md:px-8">
       <MHeader class="mb-2" />
       <OCard class="mb-2">

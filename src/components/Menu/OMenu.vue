@@ -3,30 +3,13 @@ import { ref } from 'vue'
 import type { MenuItem } from './OMenuItem.vue'
 import OMenuItem from './OMenuItem.vue'
 
-const activeItem = ref('Reclutamiento')
+export interface Props {
+  items: MenuItem[]
+  defaultItem?: string
+}
+const { items, defaultItem } = defineProps<Props>()
 
-const menuData: MenuItem[] = [
-  {
-    name: 'Administrador',
-    items: [
-      {
-        icon: 'star',
-        name: 'Talento',
-        items: [
-          {
-            name: 'Reclutamiento'
-          },
-          {
-            name: 'Asistencias'
-          },
-          {
-            name: 'Ausencias'
-          }
-        ]
-      }
-    ]
-  }
-]
+const activeItem = ref(defaultItem ?? '')
 
 function changeActive(name: string) {
   activeItem.value = name
@@ -41,7 +24,7 @@ function changeActive(name: string) {
       <span>Slot logo</span>
     </div>
     <menu class="overflow-hidden">
-      <li v-for="(item, key) in menuData" :key="key" class="px-2 py-4 list-none">
+      <li v-for="(item, key) in items" :key="key" class="px-2 py-4 list-none">
         <OMenuItem :item="item" :active-item="activeItem" @change-active="changeActive" />
       </li>
     </menu>
