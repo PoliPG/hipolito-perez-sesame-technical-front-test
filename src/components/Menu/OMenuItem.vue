@@ -19,10 +19,10 @@ export interface Props {
 }
 const { item, activeItem, level = 0 } = defineProps<Props>()
 
-let areChildrenActive = ref(false)
+let open = ref(false)
 
 onMounted(() => {
-  areChildrenActive.value = item.items ? findActiveChild(item.items) : false
+  open.value = item.items ? findActiveChild(item.items) : false
 })
 
 function findActiveChild(items: MenuItem[]): boolean {
@@ -30,7 +30,7 @@ function findActiveChild(items: MenuItem[]): boolean {
     const item = items[i]
     if (item.items) return findActiveChild(item.items)
     if (item.name === activeItem) {
-      areChildrenActive.value = true
+      open.value = true
       return true
     }
   }
@@ -39,12 +39,16 @@ function findActiveChild(items: MenuItem[]): boolean {
 }
 
 function closeSubMenu() {
-  areChildrenActive.value = false
+  open.value = false
   emit('change-active', parent ? parent.name : '')
 }
 
 function openSubMenu(name: string) {
-  areChildrenActive.value = true
+  open.value = true
+  emit('change-active', name)
+}
+
+function changeActive(name: string) {
   emit('change-active', name)
 }
 </script>
@@ -55,20 +59,21 @@ function openSubMenu(name: string) {
     :active-item="activeItem"
     :icon="item.icon"
     :level="level"
-    :is-open="areChildrenActive"
+    :is-open="open"
     :show-opener="!!(item.items && item.items.length > 0)"
     @close="closeSubMenu"
     @open="openSubMenu"
+    @change-active="changeActive"
   />
   <div class="overflow-hidden">
     <Transition>
-      <nav v-if="areChildrenActive" class="flex flex-col gap-2 rounded-lg">
+      <nav v-if="open" class="flex flex-col gap-2 rounded-lg">
         <li
           v-for="(itemChild, key) in item.items"
           :key="key"
           class="px-2 py-1 list-none"
           :class="{
-            'bg-gray-10 rounded-lg': areChildrenActive
+            'bg-gray-10 rounded-lg': open
           }"
         >
           <OMenuItem
@@ -76,7 +81,7 @@ function openSubMenu(name: string) {
             :parent="item"
             :active-item="activeItem"
             :level="level + 1"
-            @change-active="emit('change-active', item.name)"
+            @change-active="changeActive"
           />
         </li>
       </nav>

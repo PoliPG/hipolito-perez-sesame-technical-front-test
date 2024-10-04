@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import AIcon, { type Icons } from '../Icons/AIcon.vue'
 
-const emit = defineEmits(['open', 'close'])
+const emit = defineEmits(['open', 'close', 'change-active'])
 
 export interface Props {
   icon?: Icons
@@ -19,7 +19,10 @@ const isActive = computed(() => {
 })
 
 function toggleMenu() {
-  if (showOpener === false) return
+  if (!showOpener) {
+    emit('change-active', name)
+    return
+  }
 
   if (isActive.value) {
     emit('close')
@@ -41,7 +44,7 @@ function toggleMenu() {
     ]"
     @click="toggleMenu"
   >
-    <AIcon :width="14" :height="14" v-if="icon" :icon="icon" />
+    <AIcon :width="16" :height="16" v-if="icon" :icon="icon" />
     <span class="flex-grow truncate">{{ name }}</span>
     <AIcon
       class="text-current text-gray-500 transform transition-transform duration-500"
@@ -60,7 +63,7 @@ function toggleMenu() {
 }
 
 .level2 {
-  @apply pl-4 font-semibold border-l-2 py-1;
+  @apply pl-4 font-semibold border-l-2 py-1 ml-1;
 }
 
 :not(.active) {
