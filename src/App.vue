@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+import OModal from './components/Modal/OModal.vue'
 </script>
 
 <template>
@@ -7,5 +8,8 @@ import { RouterView } from 'vue-router'
     <Suspense>
       <RouterView />
     </Suspense>
+    <OModal :is-open="true">
+      <template><div>Holaa</div></template>
+    </OModal>
   </div>
 </template>
