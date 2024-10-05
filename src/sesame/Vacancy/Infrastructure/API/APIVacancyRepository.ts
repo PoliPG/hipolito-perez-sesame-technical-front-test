@@ -11,7 +11,7 @@ export class APIVacancyRepository implements VacancyRepository {
   constructor(private httpConnection: HttpConnection) {}
 
   /**
-   * Find states for a concrete vacancy
+   * Find status for a concrete vacancy
    */
   async findCandidateStatusByVacancy(vacancyID: string): Promise<VacancyCandidateStatus[]> {
     const url = `/recruitment/v1/candidate-status/${vacancyID}`

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { defineAsyncComponent, shallowRef, type Component } from 'vue'
-
-export type Icons = 'menu' | 'star' | 'chevron'
+import type { Icons } from './types/IconTypes'
 
 interface Props {
   icon: Icons
@@ -14,18 +13,19 @@ const { icon, height = 14, width = 14 } = defineProps<Props>()
 //Data
 let currentIcon = shallowRef<Component | null>(null)
 const iconMap = new Map<Icons, Component>()
-iconMap.set(
-  'menu',
-  defineAsyncComponent(() => import('./AMenuIcon.vue'))
-)
-iconMap.set(
-  'star',
-  defineAsyncComponent(() => import('./AStarIcon.vue'))
-)
-iconMap.set(
-  'chevron',
-  defineAsyncComponent(() => import('./AChevron.vue'))
-)
+initMapper()
+
+// prettier-ignore
+function initMapper() {
+  iconMap.set( 'menu', defineAsyncComponent(() => import('./types/AMenuIcon.vue')))
+  iconMap.set('star', defineAsyncComponent(() => import('./types/AStarIcon.vue')))
+  iconMap.set('chevron', defineAsyncComponent(() => import('./types/AChevronIcon.vue')))
+  iconMap.set('confetti',defineAsyncComponent(() => import('./types/AConfettiIcon.vue')))
+  iconMap.set('inbox', defineAsyncComponent(() => import('./types/AInboxIcon.vue')))
+  iconMap.set('ban', defineAsyncComponent(() => import('./types/ABanIcon.vue')))
+  iconMap.set('user', defineAsyncComponent(() => import('./types/AUserIcon.vue')))
+  iconMap.set('thumbs-up', defineAsyncComponent(() => import('./types/AThumbUpIcon.vue')))
+}
 
 currentIcon.value = iconMap.get(icon) ?? null
 </script>

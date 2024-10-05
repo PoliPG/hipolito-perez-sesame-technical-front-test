@@ -1,10 +1,46 @@
 <script setup lang="ts">
 interface Props {
+  type: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   text: string
 }
 const { text } = defineProps<Props>()
 </script>
 
 <template>
-  <h1 class="font-bold text-3xl text-turquoise-900">{{ text }}</h1>
+  <component :is="type" class="text-turquoise-900">{{ text }}</component>
 </template>
+
+<style lang="postcss" scoped>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-bold;
+}
+
+h1 {
+  @apply text-3xl;
+}
+
+h2 {
+  @apply text-2xl;
+}
+
+h3 {
+  @apply text-xl;
+}
+
+h4 {
+  @apply text-lg;
+}
+
+h5 {
+  @apply text-base;
+}
+
+h6 {
+  @apply text-sm;
+}
+</style>

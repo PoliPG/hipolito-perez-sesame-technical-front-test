@@ -13,10 +13,10 @@ export class GetVacancyCandidateStatusQueryHandler implements Handler {
   ) {}
 
   async handle(query: GetVacancyCandidateStatusQuery): Promise<VacancyCandidateStatusDTO[]> {
-    const candidateStatus = await this.vacancyRepository.findCandidateStatusByVacancy(
+    const candidateStatuses = await this.vacancyRepository.findCandidateStatusByVacancy(
       query.vacancyId
     )
-    return candidateStatus.map((candidateState) => this.getDTO(candidateState))
+    return candidateStatuses.map((candidateStatus) => this.getDTO(candidateStatus))
   }
 
   private getDTO(candidateStatus: VacancyCandidateStatus): VacancyCandidateStatusDTO {

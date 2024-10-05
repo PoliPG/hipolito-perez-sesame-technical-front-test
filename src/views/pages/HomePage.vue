@@ -8,9 +8,9 @@ import HomeTemplate from '../templates/HomeTemplate.vue'
 
 const queryBus = inject(QueryBusKey)!
 const query = new GetVacancyCandidateStatusQuery('c762067e-de1e-4706-9649-accad9dacb1b')
-const candidateStatus = await queryBus.dispatch<VacancyCandidateStatusDTO[]>(query)
+const candidateStatuses = await queryBus.dispatch<VacancyCandidateStatusDTO[]>(query)
 </script>
 
 <template>
-  <HomeTemplate :candidate-status="candidateStatus" />
+  <HomeTemplate :candidate-statuses="candidateStatuses" />
 </template>

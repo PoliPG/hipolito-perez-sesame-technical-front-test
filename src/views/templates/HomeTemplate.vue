@@ -1,16 +1,18 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import type { VacancyCandidateStatusDTO } from '@/sesame/Vacancy/Application/get-vacancy-candidate-status/VacancyCandidateStatusDTO'
+import type { MenuItem } from '@/components/Menu/OMenuItem.vue'
+// Components
 import MHeader from '@/components/Header/MHeader.vue'
 import OCard from '@/components/Card/OCard.vue'
 import MTabs from '@/components/Tab/MTabs.vue'
 import OMenu from '@/components/Menu/OMenu.vue'
-import type { MenuItem } from '@/components/Menu/OMenuItem.vue'
-import { ref } from 'vue'
+import OVacancyBoard from '@/sesame/Vacancy/Infrastructure/Vue/components/VacancyBoard/OVacancyBoard.vue'
 
 interface Props {
-  candidateStatus: VacancyCandidateStatusDTO[]
+  candidateStatuses: VacancyCandidateStatusDTO[]
 }
-const { candidateStatus } = defineProps<Props>()
+const { candidateStatuses } = defineProps<Props>()
 
 const isMenuOpen = ref(false)
 
@@ -37,10 +39,10 @@ function toggleMenu(): void {
 </script>
 
 <template>
-  <main class="md:flex mx-auto px-2 max-w-7xl">
+  <main class="md:flex mx-auto px-2 w-full max-w-8xl">
     <div
       :class="{ hidden: !isMenuOpen }"
-      class="md:block md:relative fixed inset-0 bg-gray-600 bg-opacity-60 menu"
+      class="lg:block md:relative fixed inset-0 bg-gray-600 bg-opacity-60 menu"
       @click="toggleMenu"
     >
       <OMenu
@@ -52,7 +54,7 @@ function toggleMenu(): void {
       />
     </div>
 
-    <div class="md:flex-grow md:px-8">
+    <div class="md:flex-grow md:px-6 overflow-hidden">
       <MHeader class="mb-2" @toggle-menu="toggleMenu" />
       <OCard class="mb-2">
         <div class="-mt-2">
@@ -61,9 +63,7 @@ function toggleMenu(): void {
             <template #candidates>Candidatos</template>
             <template #content="{ activeTab }">
               <div v-if="activeTab === 'vacancies'">
-                <div v-for="candidateState in candidateStatus" :key="candidateState.id">
-                  <span class="px-2 font-bold">{{ candidateState.name }}</span>
-                </div>
+                <OVacancyBoard :candidate-statuses="candidateStatuses" />
               </div>
               <div v-else-if="activeTab === 'candidates'">Candidatos</div>
             </template>
