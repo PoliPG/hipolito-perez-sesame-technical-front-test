@@ -14,7 +14,7 @@ function toggleMenu(): void {
   <header class="flex justify-between items-center px-3 md:px-0 py-3">
     <div class="flex items-center gap-2">
       <AIcon class="md:hidden" icon="menu" @click="toggleMenu" />
-      <ATitle text="Reclutamiento" />
+      <ATitle type="h1" text="Reclutamiento" />
     </div>
     <AAvatar
       class="w-8 h-8"

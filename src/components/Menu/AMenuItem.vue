@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import AIcon, { type Icons } from '../Icons/AIcon.vue'
+import AIcon from '../Icons/AIcon.vue'
+import type { Icons } from '@/components/Icons/types/IconTypes'
 
 const emit = defineEmits(['open', 'close', 'change-active'])
 

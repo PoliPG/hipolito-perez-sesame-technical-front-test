@@ -15,6 +15,9 @@ export default {
       },
       fontFamily: {
         figtree: ['Figtree', 'sans-serif']
+      },
+      maxWidth: {
+        '8xl': '1440px'
       }
     }
   },
