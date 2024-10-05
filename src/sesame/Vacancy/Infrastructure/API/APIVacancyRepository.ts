@@ -11,7 +11,7 @@ import HttpContainerTypes from '@/sesame/Shared/Http/HttpContainerTypes'
 export class APIVacancyRepository implements VacancyRepository {
   constructor(
     @inject(HttpContainerTypes.BackendHttpConnection)
-    private httpConnection: HttpConnection
+    private backendHttpConnection: HttpConnection
   ) {}
 
   /**
@@ -19,7 +19,8 @@ export class APIVacancyRepository implements VacancyRepository {
    */
   async findCandidateStatusByVacancy(vacancyID: string): Promise<VacancyCandidateStatus[]> {
     const url = `/recruitment/v1/candidate-status/${vacancyID}`
-    const apiCandidates = await this.httpConnection.get<APIDTO<APIVacancyCandidateStatusDTO[]>>(url)
+    const apiCandidates =
+      await this.backendHttpConnection.get<APIDTO<APIVacancyCandidateStatusDTO[]>>(url)
 
     if (apiCandidates.data.length === 0) return []
     return apiCandidates.data.map((dto) => APIMapperVacancyCandidateStatus.createFromDTO(dto))

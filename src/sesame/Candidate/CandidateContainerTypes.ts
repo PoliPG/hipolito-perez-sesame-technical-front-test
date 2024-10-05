@@ -1,3 +1,4 @@
 export default {
-  CandidateRepository: Symbol.for('CandidateRepository')
+  CandidateRepository: Symbol.for('CandidateRepository'),
+  GetVacancyCandidatesQueryHandler: Symbol.for('GetVacancyCandidatesQueryHandler')
 }

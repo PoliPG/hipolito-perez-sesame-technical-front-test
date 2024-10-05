@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { VacancyCandidateStatusDTO } from '@/sesame/Vacancy/Application/get-vacancy-candidate-status/VacancyCandidateStatusDTO'
+import type { VacancyCandidateDTO } from '@/sesame/Candidate/Application/get-vacancy-candidates/VacancyCandidateDTO'
 import type { MenuItem } from '@/components/Menu/OMenuItem.vue'
 // Components
 import MHeader from '@/components/Header/MHeader.vue'
@@ -11,6 +12,7 @@ import OVacancyBoard from '@/sesame/Vacancy/Infrastructure/Vue/components/Vacanc
 
 interface Props {
   candidateStatuses: VacancyCandidateStatusDTO[]
+  candidates: VacancyCandidateDTO[]
 }
 const { candidateStatuses } = defineProps<Props>()
 
@@ -63,7 +65,7 @@ function toggleMenu(): void {
             <template #candidates>Candidatos</template>
             <template #content="{ activeTab }">
               <div v-if="activeTab === 'vacancies'">
-                <OVacancyBoard :candidate-statuses="candidateStatuses" />
+                <OVacancyBoard :candidate-statuses="candidateStatuses" :candidates="candidates" />
               </div>
               <div v-else-if="activeTab === 'candidates'">Candidatos</div>
             </template>
