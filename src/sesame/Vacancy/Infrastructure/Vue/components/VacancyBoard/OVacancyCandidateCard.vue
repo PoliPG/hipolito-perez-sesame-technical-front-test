@@ -1,22 +1,5 @@
-<script setup lang="ts">
-import type { VacancyCandidateStatusDTO } from '@/sesame/Vacancy/Application/get-vacancy-candidate-status/VacancyCandidateStatusDTO'
-
-import MVacancyCandidateStatusHeader from './MVacancyCandidateStatusHeader.vue'
-
-interface Props {
-  candidateStatus: VacancyCandidateStatusDTO
-}
-
-const { candidateStatus } = defineProps<Props>()
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div class="border-gray-[#E2E8F0] p-4 border rounded-xl h-[592px]">
-    <MVacancyCandidateStatusHeader
-      class="mb-2"
-      :key="candidateStatus.id"
-      :candidate-status-name="candidateStatus.name"
-    />
-    <div></div>
-  </div>
+  <div></div>
 </template>
