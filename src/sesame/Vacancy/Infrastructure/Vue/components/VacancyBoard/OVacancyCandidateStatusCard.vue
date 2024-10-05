@@ -13,7 +13,7 @@ const { candidateStatus, candidates } = defineProps<Props>()
 </script>
 
 <template>
-  <div class="border-gray-[#E2E8F0] p-4 border rounded-xl h-[592px]">
+  <section class="border-gray-[#E2E8F0] p-4 border rounded-xl h-[592px]">
     <MVacancyCandidateStatusHeader
       :key="candidateStatus.id"
       :candidate-status-name="candidateStatus.name"
@@ -21,5 +21,5 @@ const { candidateStatus, candidates } = defineProps<Props>()
     <div v-for="(candidate, index) in candidates" :key="index">
       {{ candidate.firstName }}
     </div>
-  </div>
+  </section>
 </template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import type { Icons } from '../Icons/AIcon.vue'
+import { computed, onMounted, ref } from 'vue'
+import type { Icons } from '../Icons/types/IconTypes'
 import AMenuItem from './AMenuItem.vue'
 
 export interface MenuItem {
@@ -20,6 +20,10 @@ export interface Props {
 const { item, activeItem, level = 0 } = defineProps<Props>()
 
 let open = ref(false)
+
+const hasChildren = computed(() => {
+  return !!(item.items && item.items.length > 0)
+})
 
 onMounted(() => {
   open.value = item.items ? findActiveChild(item.items) : false
@@ -60,14 +64,14 @@ function changeActive(name: string) {
     :icon="item.icon"
     :level="level"
     :is-open="open"
-    :show-opener="!!(item.items && item.items.length > 0)"
+    :show-opener="hasChildren"
     @close="closeSubMenu"
     @open="openSubMenu"
     @change-active="changeActive"
   />
-  <div class="overflow-hidden">
+  <component :is="level === 1 ? 'nav' : 'div'" class="overflow-hidden">
     <Transition>
-      <nav v-if="open" class="flex flex-col gap-2 rounded-lg">
+      <ul v-if="open" class="flex flex-col gap-2 rounded-lg">
         <li
           v-for="(itemChild, key) in item.items"
           :key="key"
@@ -84,9 +88,9 @@ function changeActive(name: string) {
             @change-active="changeActive"
           />
         </li>
-      </nav>
+      </ul>
     </Transition>
-  </div>
+  </component>
 </template>
 
 <style lang="css" scoped>
