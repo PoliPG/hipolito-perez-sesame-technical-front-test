@@ -16,7 +16,6 @@ const { candidateStatuses } = defineProps<Props>()
       v-for="candidateStatus in candidateStatuses"
       :key="candidateStatus.id"
       :candidate-status="candidateStatus"
-      class="px-2 font-bold"
     />
   </div>
 </template>

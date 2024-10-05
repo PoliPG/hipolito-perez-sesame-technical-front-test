@@ -9,25 +9,28 @@ interface Props {
   candidateStatusName: string
 }
 
+type designHeaderConfig = { icon: Icons; color: string }
+
 const { candidateStatusName } = defineProps<Props>()
 
-let icon = ref<Icons>('star')
-const iconMap = new Map<string, Icons>()
+let designConfig = ref<designHeaderConfig>({ icon: 'star', color: '#22C55E' })
+const iconMap = new Map<string, designHeaderConfig>()
 initMapper()
-icon.value = iconMap.get(candidateStatusName) ?? 'star'
+designConfig.value = iconMap.get(candidateStatusName) ?? designConfig.value
 
 function initMapper() {
-  iconMap.set('New', 'inbox')
-  iconMap.set('Accepted', 'thumbs-up')
-  iconMap.set('Interview', 'user')
-  iconMap.set('Selected', 'confetti')
-  iconMap.set('Discarded', 'ban')
+  iconMap.set('New', { icon: 'inbox', color: '#22C55E' })
+  iconMap.set('Accepted', { icon: 'thumbs-up', color: '#72dfd8' })
+  iconMap.set('Interview', { icon: 'user', color: '#14B8A6' })
+  iconMap.set('Selected', { icon: 'confetti', color: '#3B82F6' })
+  iconMap.set('Discarded', { icon: 'ban', color: '#ED6F6F' })
 }
 </script>
 
 <template>
-  <header class="flex items-center gap-3 w-64">
-    <AIcon :icon="icon"></AIcon>
-    <ATitle type="h5" :text="candidateStatusName"></ATitle>
+  <div class="mb-2 rounded-sm w-full h-1" :style="`background-color: ${designConfig.color};`"></div>
+  <header class="flex items-center gap-1 w-64" :style="`color: ${designConfig.color}`">
+    <AIcon :height="18" :width="18" :icon="designConfig.icon"></AIcon>
+    <ATitle type="h5" class="font-bold leading-5" :text="candidateStatusName"></ATitle>
   </header>
 </template>

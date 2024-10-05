@@ -13,9 +13,9 @@ const { candidateStatus } = defineProps<Props>()
 <template>
   <div class="border-gray-[#E2E8F0] p-4 border rounded-xl h-[592px]">
     <MVacancyCandidateStatusHeader
+      class="mb-2"
       :key="candidateStatus.id"
       :candidate-status-name="candidateStatus.name"
-      class="px-2 font-bold"
     />
     <div></div>
   </div>

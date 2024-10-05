@@ -11,27 +11,36 @@ const { text } = defineProps<Props>()
 </template>
 
 <style lang="postcss" scoped>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-bold;
+}
+
 h1 {
-  @apply text-3xl font-bold;
+  @apply text-3xl;
 }
 
 h2 {
-  @apply text-2xl font-bold;
+  @apply text-2xl;
 }
 
 h3 {
-  @apply text-xl font-semibold;
+  @apply text-xl;
 }
 
 h4 {
-  @apply text-lg font-semibold;
+  @apply text-lg;
 }
 
 h5 {
-  @apply text-base font-semibold;
+  @apply text-base;
 }
 
 h6 {
-  @apply text-sm font-semibold;
+  @apply text-sm;
 }
 </style>
