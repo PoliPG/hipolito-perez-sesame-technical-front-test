@@ -15,14 +15,18 @@ interface CandidateStatusDTO {
 @injectable()
 export class InMemoryVacancyRepository implements VacancyRepository {
   /**
-   * Find states for a concrete vacancy
+   * Find status for a concrete vacancy
    */
   async findCandidateStatusByVacancy(vacancyID: string): Promise<VacancyCandidateStatus[]> {
     return this.getCandidateStatus()
-      .filter((candidateState) => candidateState.vacancyId === vacancyID)
+      .filter((candidateStatus) => candidateStatus.vacancyId === vacancyID)
       .map(
-        (candidateState) =>
-          new VacancyCandidateStatus(candidateState.id, candidateState.name, candidateState.order)
+        (candidateStatus) =>
+          new VacancyCandidateStatus(
+            candidateStatus.id,
+            candidateStatus.name,
+            candidateStatus.order
+          )
       )
   }
 
