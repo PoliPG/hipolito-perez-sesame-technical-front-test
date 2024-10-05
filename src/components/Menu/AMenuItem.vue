@@ -36,6 +36,7 @@ function toggleMenu() {
 <template>
   <div
     :data-menu-item-name="name"
+    :tabindex="1"
     class="flex items-center gap-2 px-1 w-full text-sm leading-5 cursor-pointer select-none"
     :class="[
       {
@@ -44,6 +45,7 @@ function toggleMenu() {
       `level${level}`
     ]"
     @click="toggleMenu"
+    @keypress="toggleMenu"
   >
     <AIcon :width="16" :height="16" v-if="icon" :icon="icon" />
     <span class="flex-grow truncate">{{ name }}</span>

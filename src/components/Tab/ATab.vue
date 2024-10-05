@@ -23,6 +23,7 @@ function onClick(): void {
     :tabindex="0"
     :data-id="id"
     @click="onClick"
+    @keypress="onClick"
     class="border-white py-2 border-b-2 text-center leading-6 cursor-pointer"
     :class="{
       'border-b-2 border-b-turquoise-200 text-turquoise-200 font-bold': isActive,
