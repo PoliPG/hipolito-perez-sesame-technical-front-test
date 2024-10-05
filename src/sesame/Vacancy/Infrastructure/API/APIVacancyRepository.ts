@@ -4,11 +4,15 @@ import type { VacancyRepository } from '../../Domain/VacancyRepository'
 import { APIMapperVacancyCandidateStatus } from './DTO/APIMapperVacancyCandidateStatus'
 import type { APIVacancyCandidateStatusDTO } from './DTO/APIVacancyCandidateStatusDTO'
 import type { VacancyCandidateStatus } from '../../Domain/VacancyCandidateStatus'
-import { injectable } from 'inversify'
+import { injectable, inject } from 'inversify'
+import HttpContainerTypes from '@/sesame/Shared/Http/HttpContainerTypes'
 
 @injectable()
 export class APIVacancyRepository implements VacancyRepository {
-  constructor(private httpConnection: HttpConnection) {}
+  constructor(
+    @inject(HttpContainerTypes.BackendHttpConnection)
+    private httpConnection: HttpConnection
+  ) {}
 
   /**
    * Find status for a concrete vacancy
