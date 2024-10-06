@@ -7,14 +7,18 @@ import ATextInput from './ATextInput.vue'
 
 interface Props {
   placeholder: string
-  icon: Icons
+  icon?: Icons
+  animate?: boolean
+  size?: 'sm' | 'md'
 }
 
-const { placeholder, icon } = defineProps<Props>()
+const { placeholder, icon, animate = false, size = 'md' } = defineProps<Props>()
 
 const isFocused = ref(false)
-const input = ref(null)
-const { width } = useElementSize(input)
+const inputElement = ref(null)
+const { width } = useElementSize(inputElement)
+
+const input = defineModel()
 let initWidth = 0
 
 onMounted(() => {
@@ -24,14 +28,15 @@ onMounted(() => {
 
 <template>
   <div
-    class="flex items-center gap-2 border-gray-[#E2E8F0] bg-[#F8FAFC] px-3 py-2 border rounded-xl font-normal text-gray-400 text-sm leading-4"
-    :class="{ focus: isFocused }"
-    ref="input"
+    class="flex items-center gap-2 border-gray-[#E2E8F0] bg-[#F8FAFC] border rounded-xl font-normal text-gray-800"
+    :class="[{ focus: isFocused, animate }, size]"
+    ref="inputElement"
     :style="`--input-width: ${initWidth}px`"
   >
-    <AIcon :width="16" :height="16" :icon="icon" />
+    <AIcon v-if="icon" :width="16" :height="16" :icon="icon" />
     <ATextInput
-      class="bg-transparent mt-px"
+      class="bg-transparent mt-px w-full"
+      v-model="input"
       v-bind="$attrs"
       :placeholder="placeholder"
       @focus="isFocused = true"
@@ -43,10 +48,22 @@ onMounted(() => {
 <style lang="postcss" scoped>
 div {
   @apply transition-all w-auto duration-200;
-}
 
-.focus {
-  @apply border-gray-400 transition-all text-gray-600;
-  width: calc(var(--input-width) + 5rem);
+  &.sm {
+    @apply text-sm leading-4 px-3 py-2;
+  }
+
+  &.md {
+    @apply text-base leading-4 px-3 py-2;
+  }
+
+  &.focus {
+    @apply border-gray-400 text-gray-600;
+  }
+
+  &.animate.focus {
+    @apply transition-all;
+    width: calc(var(--input-width) + 5rem);
+  }
 }
 </style>

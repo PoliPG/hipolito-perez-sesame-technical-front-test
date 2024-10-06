@@ -16,7 +16,7 @@ function close() {
   <Transition name="fade">
     <dialog
       v-if="isOpen"
-      class="z-50 fixed inset-0 flex justify-center items-center bg-gray-600 bg-opacity-60 w-full h-full"
+      class="z-50 fixed inset-0 flex justify-center items-start bg-gray-600 bg-opacity-60 pt-24 md:pt-64 w-full h-full"
       :open="isOpen"
       @click="close"
     >

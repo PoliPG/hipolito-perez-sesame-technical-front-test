@@ -8,6 +8,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import './assets/css/index.css'
+import PrimeVue from 'primevue/config'
 
 const app = createApp(App)
 
@@ -16,6 +17,8 @@ app.provide('container', IocContainer.getInstance())
 
 // Plugins
 app.use(new EventBusPluginVue())
+
+app.use(PrimeVue)
 
 app.use(createPinia())
 app.use(router)

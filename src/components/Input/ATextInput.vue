@@ -6,11 +6,13 @@ interface Props {
 }
 
 const { placeholder } = defineProps<Props>()
+const input = defineModel()
 </script>
 
 <template>
   <input
     type="text"
+    v-model="input"
     @focus="emit('focus')"
     @focusout="emit('focusOut')"
     v-bind="$attrs"

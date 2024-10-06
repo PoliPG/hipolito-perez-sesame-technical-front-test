@@ -12,6 +12,7 @@ import OVacancyBoard from '@/sesame/Vacancy/Infrastructure/Vue/components/Vacanc
 import AButton from '@/components/Button/AButton.vue'
 import MInput from '@/components/Input/MInput.vue'
 import OModal from '@/components/Modal/OModal.vue'
+import OCandidateForm from '@/sesame/Candidate/Infrastructure/Vue/components/OCandidateForm.vue'
 
 interface Props {
   candidateStatuses: VacancyCandidateStatusDTO[]
@@ -20,7 +21,7 @@ interface Props {
 const { candidateStatuses } = defineProps<Props>()
 
 let isMenuOpen = ref(false)
-let isModalOpen = ref(true)
+let isModalOpen = ref(false)
 
 const menuData: MenuItem[] = [
   {
@@ -76,7 +77,7 @@ function closeModal() {
             <template #candidates>Candidatos</template>
             <template #content="{ activeTab }">
               <div class="flex justify-between mb-4">
-                <MInput icon="search" placeholder="Buscar" />
+                <MInput icon="search" size="sm" :animate="true" placeholder="Buscar" />
                 <AButton
                   cta="Añadir candidato"
                   color="blue-marguerite"
@@ -93,8 +94,10 @@ function closeModal() {
       </OCard>
     </div>
     <OModal :is-open="isModalOpen" @close="closeModal">
-      <OCard>
-        <div class="w-64 min-h-72"></div>
+      <OCard icon="user" title="Nuevo candidato">
+        <div class="w-64">
+          <OCandidateForm :candidate-statuses="candidateStatuses" />
+        </div>
       </OCard>
     </OModal>
   </main>
