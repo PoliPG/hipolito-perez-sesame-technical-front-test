@@ -82,14 +82,14 @@ div {
 
 div.active {
   &.level1 {
-    @apply text-turquoise-200;
+    @apply text-blue-marguerite-500;
     & > .i-chevron {
-      @apply text-turquoise-200;
+      @apply text-blue-marguerite-500;
     }
   }
 
   &.level2 {
-    @apply text-turquoise-200 border-turquoise-200;
+    @apply text-blue-marguerite-500 border-blue-marguerite-500;
   }
 
   .i-chevron {

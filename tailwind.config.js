@@ -5,9 +5,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        turquoise: {
-          200: '#6C63FF',
-          900: '#1F2D52'
+        'blue-marguerite': {
+          50: '#ecf0ff',
+          100: '#dde2ff',
+          200: '#c2caff',
+          300: '#9ca6ff',
+          400: '#7577ff',
+          500: '#6c63ff',
+          600: '#5036f5',
+          700: '#452ad8',
+          800: '#3825ae',
+          900: '#312689',
+          950: '#1F2D52'
         },
         gray: {
           10: '#F8FAFC'

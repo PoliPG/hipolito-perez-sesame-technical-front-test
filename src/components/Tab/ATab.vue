@@ -36,7 +36,7 @@ li {
   @apply text-[#E2E8F0] hover:text-gray-800 hover:border-b-2 hover:border-b-gray-800;
 
   &.active {
-    @apply border-b-2 border-b-turquoise-200 text-turquoise-200 font-bold;
+    @apply border-b-2 border-b-blue-marguerite-500 text-blue-marguerite-500 font-bold;
   }
 }
 </style>
