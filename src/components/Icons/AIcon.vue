@@ -25,6 +25,7 @@ function initMapper() {
   iconMap.set('ban', defineAsyncComponent(() => import('./types/ABanIcon.vue')))
   iconMap.set('user', defineAsyncComponent(() => import('./types/AUserIcon.vue')))
   iconMap.set('thumbs-up', defineAsyncComponent(() => import('./types/AThumbUpIcon.vue')))
+  iconMap.set('search', defineAsyncComponent(() => import('./types/ASearchIcon.vue')))
 }
 
 currentIcon.value = iconMap.get(icon) ?? null
