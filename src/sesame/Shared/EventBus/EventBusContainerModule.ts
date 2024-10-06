@@ -10,6 +10,10 @@ class EventBusContainerModule extends ContainerModule {
       bind<ReturningDataBus>(EventBusContainerTypes.QueryBus)
         .to(InMemoryReturningDataBus)
         .inSingletonScope()
+
+      bind<ReturningDataBus>(EventBusContainerTypes.RequestBus)
+        .to(InMemoryReturningDataBus)
+        .inSingletonScope()
     })
   }
 }

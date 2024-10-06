@@ -12,7 +12,7 @@ export class GetVacancyCandidatesQueryHandler implements Handler {
     private candidateRepository: CandidateRepository
   ) {}
 
-  async handle(query: GetVacancyCandidatesQuery): Promise<any[]> {
+  async handle(query: GetVacancyCandidatesQuery): Promise<VacancyCandidateDTO[]> {
     const candidates = await this.candidateRepository.findCandidatesByVacancyId(query.vacancyId)
     return candidates.map((candidate) => new VacancyCandidateDTO(candidate).getPrimitives())
   }
