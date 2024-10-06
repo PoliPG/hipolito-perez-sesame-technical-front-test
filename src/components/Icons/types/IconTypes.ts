@@ -7,3 +7,4 @@ export type Icons =
   | 'ban'
   | 'user'
   | 'thumbs-up'
+  | 'search'
