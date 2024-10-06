@@ -13,24 +13,42 @@ function close() {
 </script>
 
 <template>
-  <Transition v-if="isOpen" :open="isOpen">
-    <dialog v-if="isOpen" class="z-50 fixed inset-0 bg-gray-600 bg-opacity-60" @click="close">
-      <div @click.prevent.stop class="flex justify-center items-center">
+  <Transition name="fade">
+    <dialog
+      v-if="isOpen"
+      class="z-50 fixed inset-0 flex justify-center items-center bg-gray-600 bg-opacity-60 w-full h-full"
+      :open="isOpen"
+      @click="close"
+    >
+      <div v-if="isOpen" @click.prevent.stop class="modal-content">
         <slot></slot>
       </div>
     </dialog>
   </Transition>
 </template>
 
-<style lang="css" scoped>
-.v-enter-active,
-.v-leave-active {
+<style lang="postcss" scoped>
+.fade-enter-active,
+.fade-leave-active {
   transition: all 0.5s ease;
+  .modal-content {
+    transition: all 0.5s ease;
+  }
 }
 
-.v-enter-from,
-.v-leave-to {
+.fade-leave-active {
+  transition-delay: 0.2s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
-  transform: translateY(-50px);
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  .modal-content {
+    transform: translateY(400px);
+  }
 }
 </style>
