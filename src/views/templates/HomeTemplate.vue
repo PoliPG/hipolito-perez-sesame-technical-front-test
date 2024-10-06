@@ -10,8 +10,8 @@ import MTabs from '@/components/Tab/MTabs.vue'
 import OMenu from '@/components/Menu/OMenu.vue'
 import OVacancyBoard from '@/sesame/Vacancy/Infrastructure/Vue/components/VacancyBoard/OVacancyBoard.vue'
 import AButton from '@/components/Button/AButton.vue'
-import ATextInput from '@/components/Input/ATextInput.vue'
 import MInput from '@/components/Input/MInput.vue'
+import OModal from '@/components/Modal/OModal.vue'
 
 interface Props {
   candidateStatuses: VacancyCandidateStatusDTO[]
@@ -19,7 +19,8 @@ interface Props {
 }
 const { candidateStatuses } = defineProps<Props>()
 
-const isMenuOpen = ref(false)
+let isMenuOpen = ref(false)
+let isModalOpen = ref(true)
 
 const menuData: MenuItem[] = [
   {
@@ -41,6 +42,14 @@ const menuData: MenuItem[] = [
 function toggleMenu(): void {
   isMenuOpen.value = !isMenuOpen.value
 }
+
+function openModal() {
+  isModalOpen.value = true
+}
+
+function closeModal() {
+  isModalOpen.value = false
+}
 </script>
 
 <template>
@@ -58,7 +67,6 @@ function toggleMenu(): void {
         @click.prevent.stop
       />
     </div>
-
     <div class="md:flex-grow md:px-6 overflow-hidden">
       <MHeader class="mb-2" @toggle-menu="toggleMenu" />
       <OCard class="mb-2">
@@ -69,7 +77,11 @@ function toggleMenu(): void {
             <template #content="{ activeTab }">
               <div class="flex justify-between mb-4">
                 <MInput icon="search" placeholder="Buscar" />
-                <AButton cta="Añadir candidato" color="blue-marguerite"></AButton>
+                <AButton
+                  cta="Añadir candidato"
+                  color="blue-marguerite"
+                  @click="openModal"
+                ></AButton>
               </div>
               <div v-if="activeTab === 'vacancies'">
                 <OVacancyBoard :candidate-statuses="candidateStatuses" :candidates="candidates" />
@@ -80,6 +92,11 @@ function toggleMenu(): void {
         </div>
       </OCard>
     </div>
+    <OModal :is-open="isModalOpen" @close="closeModal">
+      <OCard>
+        <div class="w-64 min-h-72"></div>
+      </OCard>
+    </OModal>
   </main>
 </template>
 
