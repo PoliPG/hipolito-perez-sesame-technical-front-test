@@ -9,6 +9,7 @@ import OCard from '@/components/Card/OCard.vue'
 import MTabs from '@/components/Tab/MTabs.vue'
 import OMenu from '@/components/Menu/OMenu.vue'
 import OVacancyBoard from '@/sesame/Vacancy/Infrastructure/Vue/components/VacancyBoard/OVacancyBoard.vue'
+import AButton from '@/components/Button/AButton.vue'
 
 interface Props {
   candidateStatuses: VacancyCandidateStatusDTO[]
@@ -64,6 +65,10 @@ function toggleMenu(): void {
             <template #vacancies>Vacantes</template>
             <template #candidates>Candidatos</template>
             <template #content="{ activeTab }">
+              <div class="flex justify-between mb-4">
+                <AButton cta="Añadir candidato" color="blue-marguerite"></AButton>
+                <AButton cta="Añadir candidato" color="blue-marguerite"></AButton>
+              </div>
               <div v-if="activeTab === 'vacancies'">
                 <OVacancyBoard :candidate-statuses="candidateStatuses" :candidates="candidates" />
               </div>
