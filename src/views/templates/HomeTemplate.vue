@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { defineAsyncComponent, ref } from 'vue'
 import type { VacancyCandidateStatusDTO } from '@/sesame/Vacancy/Application/get-vacancy-candidate-status/VacancyCandidateStatusDTO'
 import type { VacancyCandidateDTO } from '@/sesame/Candidate/Application/get-vacancy-candidates/VacancyCandidateDTO'
 import type { MenuItem } from '@/components/Menu/OMenuItem.vue'
@@ -13,6 +13,9 @@ import AButton from '@/components/Button/AButton.vue'
 import MInput from '@/components/Input/MInput.vue'
 import OModal from '@/components/Modal/OModal.vue'
 import OCandidateForm from '@/sesame/Candidate/Infrastructure/Vue/components/OCandidateForm.vue'
+const OCandidateList = defineAsyncComponent(
+  () => import('@/sesame/Candidate/Infrastructure/Vue/components/CandidateList/OCandidateList.vue')
+)
 
 interface Props {
   candidateStatuses: VacancyCandidateStatusDTO[]
@@ -78,7 +81,14 @@ function closeModal() {
             <template #candidates>Candidatos</template>
             <template #content="{ activeTab }">
               <div class="flex justify-between mb-4">
-                <MInput icon="search" size="sm" :animate="true" placeholder="Buscar" />
+                <div class="min-w-56">
+                  <MInput
+                    :icon="{ name: 'search', color: 'text-[#94A3B8]' }"
+                    size="sm"
+                    :animate="true"
+                    placeholder="Buscar"
+                  />
+                </div>
                 <AButton
                   cta="Añadir candidato"
                   color="blue-marguerite"
@@ -88,7 +98,9 @@ function closeModal() {
               <div v-if="activeTab === 'vacancies'">
                 <OVacancyBoard :candidate-statuses="candidateStatuses" :candidates="candidates" />
               </div>
-              <div v-else-if="activeTab === 'candidates'">Candidatos</div>
+              <div v-else-if="activeTab === 'candidates'">
+                <OCandidateList :candidates="candidates" />
+              </div>
             </template>
           </MTabs>
         </div>

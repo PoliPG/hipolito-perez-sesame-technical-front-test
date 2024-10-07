@@ -33,8 +33,8 @@ function initMapper() {
       class="mb-2 rounded-sm w-full h-1"
       :style="`background-color: ${designConfig.color};`"
     ></div>
-    <header class="flex items-center gap-1" :style="`color: ${designConfig.color}`">
-      <AIcon :height="18" :width="18" :icon="designConfig.icon"></AIcon>
+    <header class="flex items-center gap-1 py-1" :style="`color: ${designConfig.color}`">
+      <AIcon :height="24" :width="24" :icon="designConfig.icon"></AIcon>
       <ATitle type="h5" class="font-bold leading-5" :text="candidateStatusName"></ATitle>
     </header>
   </div>
