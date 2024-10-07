@@ -25,11 +25,18 @@ function onClick(): void {
     @click="onClick"
     @keypress="onClick"
     class="border-white py-2 border-b-2 text-center leading-6 cursor-pointer"
-    :class="{
-      'border-b-2 border-b-turquoise-200 text-turquoise-200 font-bold': isActive,
-      'text-[#E2E8F0]': !isActive
-    }"
+    :class="{ active: isActive }"
   >
     <slot></slot>
   </li>
 </template>
+
+<style scoped lang="postcss">
+li {
+  @apply text-[#E2E8F0] hover:text-gray-800 hover:border-b-2 hover:border-b-gray-800;
+
+  &.active {
+    @apply border-b-2 border-b-blue-marguerite-500 text-blue-marguerite-500 font-bold;
+  }
+}
+</style>

@@ -7,7 +7,7 @@ const { text } = defineProps<Props>()
 </script>
 
 <template>
-  <component :is="type" class="text-turquoise-900">{{ text }}</component>
+  <component :is="type" class="text-blue-marguerite-950">{{ text }}</component>
 </template>
 
 <style lang="postcss" scoped>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { VacancyCandidateStatusDTO } from '@/sesame/Vacancy/Application/get-vacancy-candidate-status/VacancyCandidateStatusDTO'
+import type { VacancyCandidateDTO } from '@/sesame/Candidate/Application/get-vacancy-candidates/VacancyCandidateDTO'
 import type { MenuItem } from '@/components/Menu/OMenuItem.vue'
 // Components
 import MHeader from '@/components/Header/MHeader.vue'
@@ -8,13 +9,20 @@ import OCard from '@/components/Card/OCard.vue'
 import MTabs from '@/components/Tab/MTabs.vue'
 import OMenu from '@/components/Menu/OMenu.vue'
 import OVacancyBoard from '@/sesame/Vacancy/Infrastructure/Vue/components/VacancyBoard/OVacancyBoard.vue'
+import AButton from '@/components/Button/AButton.vue'
+import MInput from '@/components/Input/MInput.vue'
+import OModal from '@/components/Modal/OModal.vue'
+import OCandidateForm from '@/sesame/Candidate/Infrastructure/Vue/components/OCandidateForm.vue'
 
 interface Props {
   candidateStatuses: VacancyCandidateStatusDTO[]
+  candidates: VacancyCandidateDTO[]
+  vacancyId: string
 }
-const { candidateStatuses } = defineProps<Props>()
+const { candidateStatuses, candidates, vacancyId } = defineProps<Props>()
 
-const isMenuOpen = ref(false)
+let isMenuOpen = ref(false)
+let isModalOpen = ref(false)
 
 const menuData: MenuItem[] = [
   {
@@ -36,6 +44,14 @@ const menuData: MenuItem[] = [
 function toggleMenu(): void {
   isMenuOpen.value = !isMenuOpen.value
 }
+
+function openModal() {
+  isModalOpen.value = true
+}
+
+function closeModal() {
+  isModalOpen.value = false
+}
 </script>
 
 <template>
@@ -53,7 +69,6 @@ function toggleMenu(): void {
         @click.prevent.stop
       />
     </div>
-
     <div class="md:flex-grow md:px-6 overflow-hidden">
       <MHeader class="mb-2" @toggle-menu="toggleMenu" />
       <OCard class="mb-2">
@@ -62,8 +77,16 @@ function toggleMenu(): void {
             <template #vacancies>Vacantes</template>
             <template #candidates>Candidatos</template>
             <template #content="{ activeTab }">
+              <div class="flex justify-between mb-4">
+                <MInput icon="search" size="sm" :animate="true" placeholder="Buscar" />
+                <AButton
+                  cta="Añadir candidato"
+                  color="blue-marguerite"
+                  @click="openModal"
+                ></AButton>
+              </div>
               <div v-if="activeTab === 'vacancies'">
-                <OVacancyBoard :candidate-statuses="candidateStatuses" />
+                <OVacancyBoard :candidate-statuses="candidateStatuses" :candidates="candidates" />
               </div>
               <div v-else-if="activeTab === 'candidates'">Candidatos</div>
             </template>
@@ -71,6 +94,17 @@ function toggleMenu(): void {
         </div>
       </OCard>
     </div>
+    <OModal :is-open="isModalOpen" @close="closeModal">
+      <OCard icon="user" title="Nuevo candidato">
+        <div class="w-64">
+          <OCandidateForm
+            :candidate-statuses="candidateStatuses"
+            :vacancy-id="vacancyId"
+            @success="closeModal"
+          />
+        </div>
+      </OCard>
+    </OModal>
   </main>
 </template>
 

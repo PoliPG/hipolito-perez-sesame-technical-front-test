@@ -9,20 +9,11 @@ import type { IocContainer } from '../Shared/IocContainer/Infrastructure/Contain
 import type { ReturningDataBus } from '../Shared/EventBus/Domain/Bus'
 import EventBusContainerTypes from '../Shared/EventBus/EventBusContainerTypes'
 import { GetVacancyCandidateStatusQuery } from './Application/get-vacancy-candidate-status/GetVacancyCandidateStatusQuery'
-import AxiosHttpConnection from '../Shared/Http/Infrastructure/AxiosHttpConnection'
 
 export class VacancyContainerModule extends ContainerModule {
   constructor() {
     super((bind: interfaces.Bind) => {
-      // Set environment data
-      const sesameUrl: string = import.meta.env.VITE_SESAME_API_URL
-      const apiToken: string = import.meta.env.VITE_SESAME_API_TOKEN
-      const sesameHttpConnection = new AxiosHttpConnection(sesameUrl, apiToken)
-
-      const VacancyRepository = new APIVacancyRepository(sesameHttpConnection)
-      bind<VacancyRepository>(VacancyContainerTypes.VacancyRepository).toConstantValue(
-        VacancyRepository
-      )
+      bind<VacancyRepository>(VacancyContainerTypes.VacancyRepository).to(APIVacancyRepository)
 
       bind<Handler>(VacancyContainerTypes.GetVacancyCandidateStatusQueryHandler)
         .to(GetVacancyCandidateStatusQueryHandler)

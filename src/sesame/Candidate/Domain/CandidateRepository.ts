@@ -1,7 +1,14 @@
 import type { Candidate } from './Candidate'
 
+export interface CreateCandidateParams {
+  firstName: string
+  lastName: string
+  vacancyId: string
+  vacancyCandidateStatusId: string
+}
+
 export interface CandidateRepository {
-  findCandidatesByVacancy(vacancyId: string): Promise<Candidate[]>
-  createCandidate(candidate: Candidate): Promise<void>
-  updateCandidate(candidate: Candidate): Promise<void>
+  findCandidatesByVacancyId(vacancyId: string): Promise<Candidate[]>
+  createCandidate(candidate: CreateCandidateParams): Promise<Candidate>
+  updateCandidate(candidate: Candidate): Promise<Candidate>
 }

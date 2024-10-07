@@ -28,9 +28,14 @@ function initMapper() {
 </script>
 
 <template>
-  <div class="mb-2 rounded-sm w-full h-1" :style="`background-color: ${designConfig.color};`"></div>
-  <header class="flex items-center gap-1 w-64" :style="`color: ${designConfig.color}`">
-    <AIcon :height="18" :width="18" :icon="designConfig.icon"></AIcon>
-    <ATitle type="h5" class="font-bold leading-5" :text="candidateStatusName"></ATitle>
-  </header>
+  <div v-bind:class="$attrs.class">
+    <div
+      class="mb-2 rounded-sm w-full h-1"
+      :style="`background-color: ${designConfig.color};`"
+    ></div>
+    <header class="flex items-center gap-1" :style="`color: ${designConfig.color}`">
+      <AIcon :height="18" :width="18" :icon="designConfig.icon"></AIcon>
+      <ATitle type="h5" class="font-bold leading-5" :text="candidateStatusName"></ATitle>
+    </header>
+  </div>
 </template>
