@@ -8,3 +8,5 @@ export type Icons =
   | 'user'
   | 'thumbs-up'
   | 'search'
+  | 'clock'
+  | 'vertical-dots'
