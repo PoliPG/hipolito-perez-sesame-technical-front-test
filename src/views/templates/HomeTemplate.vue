@@ -17,8 +17,9 @@ import OCandidateForm from '@/sesame/Candidate/Infrastructure/Vue/components/OCa
 interface Props {
   candidateStatuses: VacancyCandidateStatusDTO[]
   candidates: VacancyCandidateDTO[]
+  vacancyId: string
 }
-const { candidateStatuses } = defineProps<Props>()
+const { candidateStatuses, candidates, vacancyId } = defineProps<Props>()
 
 let isMenuOpen = ref(false)
 let isModalOpen = ref(false)
@@ -96,7 +97,11 @@ function closeModal() {
     <OModal :is-open="isModalOpen" @close="closeModal">
       <OCard icon="user" title="Nuevo candidato">
         <div class="w-64">
-          <OCandidateForm :candidate-statuses="candidateStatuses" />
+          <OCandidateForm
+            :candidate-statuses="candidateStatuses"
+            :vacancy-id="vacancyId"
+            @success="closeModal"
+          />
         </div>
       </OCard>
     </OModal>

@@ -23,5 +23,9 @@ onMounted(async () => {
 </script>
 
 <template>
-  <HomeTemplate :candidate-statuses="candidateStatuses" :candidates="candidates" />
+  <HomeTemplate
+    :candidate-statuses="candidateStatuses"
+    :candidates="candidates"
+    :vacancy-id="vacancyId"
+  />
 </template>

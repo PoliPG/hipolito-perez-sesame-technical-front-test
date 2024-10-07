@@ -10,6 +10,7 @@ interface Props {
   icon?: Icons
   animate?: boolean
   size?: 'sm' | 'md'
+  error?: string
 }
 
 const { placeholder, icon, animate = false, size = 'md' } = defineProps<Props>()

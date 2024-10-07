@@ -1,16 +1,16 @@
 import { Event as Request } from '@/sesame/Shared/EventBus/Domain/Event'
 
 export class CreateCandidateRequest extends Request {
-  readonly firstName: string
-  readonly lastName: string
-  readonly vacancyId: string
-  readonly vacancyCandidateStatusId: string
+  readonly firstName?: string
+  readonly lastName?: string
+  readonly vacancyId?: string
+  readonly vacancyCandidateStatusId?: string
 
   constructor(
-    firstName: string,
-    lastName: string,
-    vacancyId: string,
-    vacancyCandidateStatusId: string
+    firstName?: string,
+    lastName?: string,
+    vacancyId?: string,
+    vacancyCandidateStatusId?: string
   ) {
     super()
     this.firstName = firstName

@@ -16,11 +16,11 @@ export class ErrorNotification extends NotificationBase implements Notification 
     this.errors.push(error)
   }
 
-  public hasErrors(): boolean {
-    return this.errors.length > 0
+  public getErrors(): NotificationError[] {
+    return this.errors
   }
 
-  invalid(): this is ErrorNotification {
+  isError(): this is ErrorNotification {
     return true
   }
 }

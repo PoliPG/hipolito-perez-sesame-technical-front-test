@@ -9,6 +9,8 @@ import type { ReturningDataBus } from '../Shared/EventBus/Domain/Bus'
 import EventBusContainerTypes from '../Shared/EventBus/EventBusContainerTypes'
 import { GetVacancyCandidatesQuery } from './Application/get-vacancy-candidates/GetVacancyCandidatesQuery'
 import { GetVacancyCandidatesQueryHandler } from './Application/get-vacancy-candidates/GetVacancyCandidatesQueryHandler'
+import { CreateCandidateRequestHandler } from './Application/create-candidate/CreateCandidateRequestHandler'
+import { CreateCandidateRequest } from './Application/create-candidate/CreateCandidateRequest'
 
 export class CandidateContainerModule extends ContainerModule {
   constructor() {
@@ -19,15 +21,25 @@ export class CandidateContainerModule extends ContainerModule {
       bind<Handler>(CandidateContainerTypes.GetVacancyCandidatesQueryHandler)
         .to(GetVacancyCandidatesQueryHandler)
         .inSingletonScope()
+
+      bind<Handler>(CandidateContainerTypes.CreateCandidateRequestHandler)
+        .to(CreateCandidateRequestHandler)
+        .inSingletonScope()
     })
   }
 
   init(container: IocContainer): void {
     const queryBus = container.get<ReturningDataBus>(EventBusContainerTypes.QueryBus)
+    const requestBus = container.get<ReturningDataBus>(EventBusContainerTypes.RequestBus)
 
     queryBus.register(
       GetVacancyCandidatesQuery.name,
       container.get<Handler>(CandidateContainerTypes.GetVacancyCandidatesQueryHandler)
+    )
+
+    requestBus.register(
+      CreateCandidateRequest.name,
+      container.get<Handler>(CandidateContainerTypes.CreateCandidateRequestHandler)
     )
   }
 }

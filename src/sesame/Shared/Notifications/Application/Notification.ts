@@ -2,7 +2,7 @@ import type { ErrorNotification } from './ErrorNotification'
 
 export interface Notification {
   message: string
-  invalid(): this is ErrorNotification
+  isError(): this is ErrorNotification
 }
 
 export class NotificationBase implements Notification {
@@ -16,7 +16,7 @@ export class NotificationBase implements Notification {
     return this._message
   }
 
-  public invalid(): this is ErrorNotification {
+  public isError(): this is ErrorNotification {
     return false
   }
 }
