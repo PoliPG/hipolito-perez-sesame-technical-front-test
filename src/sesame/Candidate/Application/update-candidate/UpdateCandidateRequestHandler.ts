@@ -2,10 +2,10 @@ import type { Handler } from '@/sesame/Shared/EventBus/Domain/Handler'
 import { inject, injectable } from 'inversify'
 import CandidateContainerTypes from '../../CandidateContainerTypes'
 import type { CandidateRepository } from '../../Domain/CandidateRepository'
-import { CreateCandidateValidator } from '../services/CreateCandidateValidator'
 import type { Notification } from '@/sesame/Shared/Notifications/Application/Notification'
 import type { UpdateCandidateRequest } from './UpdateCandidateRequest'
 import { ErrorNotification } from '@/sesame/Shared/Notifications/Application/ErrorNotification'
+import { UpdateCandidateValidator } from '../services/UpdateCandidateValidator'
 
 @injectable()
 export class UpdateCandidateRequestHandler implements Handler {
@@ -16,7 +16,7 @@ export class UpdateCandidateRequestHandler implements Handler {
 
   async handle(request: UpdateCandidateRequest): Promise<Notification> {
     try {
-      const notification = CreateCandidateValidator.validate(request)
+      const notification = UpdateCandidateValidator.validate(request)
       if (notification.isError()) return notification
 
       await this.candidateRepository.updateCandidate({
