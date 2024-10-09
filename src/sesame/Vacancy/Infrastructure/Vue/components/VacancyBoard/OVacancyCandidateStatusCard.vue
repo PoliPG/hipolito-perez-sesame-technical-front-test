@@ -43,6 +43,7 @@ async function onDrop(event: DragEvent, status: VacancyCandidateStatusDTO): Prom
     })
     return
   }
+  if (status.name === candidate.status) return
   await updateCandidate(candidate, status)
 }
 
