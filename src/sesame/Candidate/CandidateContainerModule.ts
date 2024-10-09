@@ -11,6 +11,8 @@ import { GetVacancyCandidatesQuery } from './Application/get-vacancy-candidates/
 import { GetVacancyCandidatesQueryHandler } from './Application/get-vacancy-candidates/GetVacancyCandidatesQueryHandler'
 import { CreateCandidateRequestHandler } from './Application/create-candidate/CreateCandidateRequestHandler'
 import { CreateCandidateRequest } from './Application/create-candidate/CreateCandidateRequest'
+import { UpdateCandidateRequestHandler } from './Application/update-candidate/UpdateCandidateRequestHandler'
+import { UpdateCandidateRequest } from './Application/update-candidate/UpdateCandidateRequest'
 
 export class CandidateContainerModule extends ContainerModule {
   constructor() {
@@ -24,6 +26,10 @@ export class CandidateContainerModule extends ContainerModule {
 
       bind<Handler>(CandidateContainerTypes.CreateCandidateRequestHandler)
         .to(CreateCandidateRequestHandler)
+        .inSingletonScope()
+
+      bind<Handler>(CandidateContainerTypes.UpdateCandidateRequestHandler)
+        .to(UpdateCandidateRequestHandler)
         .inSingletonScope()
     })
   }
@@ -40,6 +46,11 @@ export class CandidateContainerModule extends ContainerModule {
     requestBus.register(
       CreateCandidateRequest.name,
       container.get<Handler>(CandidateContainerTypes.CreateCandidateRequestHandler)
+    )
+
+    requestBus.register(
+      UpdateCandidateRequest.name,
+      container.get<Handler>(CandidateContainerTypes.UpdateCandidateRequestHandler)
     )
   }
 }

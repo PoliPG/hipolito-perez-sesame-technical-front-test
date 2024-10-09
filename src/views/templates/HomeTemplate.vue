@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { defineAsyncComponent, ref } from 'vue'
 import type { VacancyCandidateStatusDTO } from '@/sesame/Vacancy/Application/get-vacancy-candidate-status/VacancyCandidateStatusDTO'
 import type { VacancyCandidateDTO } from '@/sesame/Candidate/Application/get-vacancy-candidates/VacancyCandidateDTO'
 import type { MenuItem } from '@/components/Menu/OMenuItem.vue'
@@ -12,7 +12,12 @@ import OVacancyBoard from '@/sesame/Vacancy/Infrastructure/Vue/components/Vacanc
 import AButton from '@/components/Button/AButton.vue'
 import MInput from '@/components/Input/MInput.vue'
 import OModal from '@/components/Modal/OModal.vue'
-import OCandidateForm from '@/sesame/Candidate/Infrastructure/Vue/components/OCandidateForm.vue'
+const OCandidateForm = defineAsyncComponent(
+  () => import('@/sesame/Candidate/Infrastructure/Vue/components/OCandidateForm.vue')
+)
+const OCandidateList = defineAsyncComponent(
+  () => import('@/sesame/Candidate/Infrastructure/Vue/components/CandidateList/OCandidateList.vue')
+)
 
 interface Props {
   candidateStatuses: VacancyCandidateStatusDTO[]
@@ -45,11 +50,11 @@ function toggleMenu(): void {
   isMenuOpen.value = !isMenuOpen.value
 }
 
-function openModal() {
+function NewCandidate() {
   isModalOpen.value = true
 }
 
-function closeModal() {
+function closeCandidateModal() {
   isModalOpen.value = false
 }
 </script>
@@ -78,29 +83,43 @@ function closeModal() {
             <template #candidates>Candidatos</template>
             <template #content="{ activeTab }">
               <div class="flex justify-between mb-4">
-                <MInput icon="search" size="sm" :animate="true" placeholder="Buscar" />
+                <div class="min-w-56">
+                  <MInput
+                    :icon="{ name: 'search', color: 'text-[#94A3B8]' }"
+                    size="sm"
+                    :animate="true"
+                    placeholder="Buscar"
+                  />
+                </div>
                 <AButton
                   cta="Añadir candidato"
                   color="blue-marguerite"
-                  @click="openModal"
+                  @click="NewCandidate"
                 ></AButton>
               </div>
-              <div v-if="activeTab === 'vacancies'">
-                <OVacancyBoard :candidate-statuses="candidateStatuses" :candidates="candidates" />
-              </div>
-              <div v-else-if="activeTab === 'candidates'">Candidatos</div>
+              <OVacancyBoard
+                v-if="activeTab === 'vacancies'"
+                :candidate-statuses="candidateStatuses"
+                :candidates="candidates"
+              />
+              <OCandidateList
+                :candidate-statuses="candidateStatuses"
+                :vacancy-id="vacancyId"
+                v-else-if="activeTab === 'candidates'"
+                :candidates="candidates"
+              />
             </template>
           </MTabs>
         </div>
       </OCard>
     </div>
-    <OModal :is-open="isModalOpen" @close="closeModal">
+    <OModal :is-open="isModalOpen" @close="closeCandidateModal">
       <OCard icon="user" title="Nuevo candidato">
         <div class="w-64">
           <OCandidateForm
             :candidate-statuses="candidateStatuses"
             :vacancy-id="vacancyId"
-            @success="closeModal"
+            @success="closeCandidateModal"
           />
         </div>
       </OCard>

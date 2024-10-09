@@ -11,14 +11,12 @@ const { candidate } = defineProps<Props>()
 </script>
 
 <template>
-  <article
-    class="flex flex-col gap-4 border-gray-[#E2E8F0] bg-[#F8FAFC] px-3 py-2 border rounded-lg"
-  >
+  <article class="flex flex-col gap-4 border-[#E2E8F0] bg-[#F8FAFC] px-3 py-2 border rounded-lg">
     <div class="flex justify-between items-center">
       <p class="font-semibold truncate">{{ candidate.firstName }} {{ candidate.lastName }}</p>
       <AIcon class="text-[#1F2D52]" :width="14" :height="14" icon="vertical-dots" />
     </div>
-    <div class="flex items-center gap-1 text-gray-[#94A3B8] text-sm">
+    <div class="flex items-center gap-1 font-normal text-[#94A3B8] text-sm">
       <AIcon :width="14" :height="14" icon="clock" />
       <relative-time
         class="first-letter:capitalize"

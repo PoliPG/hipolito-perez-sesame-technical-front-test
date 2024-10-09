@@ -7,7 +7,7 @@ import ATextInput from './ATextInput.vue'
 
 interface Props {
   placeholder: string
-  icon?: Icons
+  icon?: { name: Icons; color: string }
   animate?: boolean
   size?: 'sm' | 'md'
   error?: string
@@ -34,7 +34,7 @@ onMounted(() => {
     ref="inputElement"
     :style="`--input-width: ${initWidth}px`"
   >
-    <AIcon v-if="icon" :width="16" :height="16" :icon="icon" />
+    <AIcon v-if="icon" :width="16" :height="16" :icon="icon.name" :class="icon.color" />
     <ATextInput
       class="bg-transparent mt-px w-full"
       v-model="input"
@@ -51,7 +51,7 @@ div {
   @apply transition-all w-auto duration-200;
 
   &.sm {
-    @apply text-sm leading-4 px-3 py-2;
+    @apply text-sm leading-4 px-3 py-1.5;
   }
 
   &.md {

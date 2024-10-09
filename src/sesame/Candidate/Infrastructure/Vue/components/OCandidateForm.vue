@@ -8,19 +8,24 @@ import ASelectInput from '@/components/Input/ASelectInput.vue'
 import MInput from '@/components/Input/MInput.vue'
 import { CreateCandidateRequest } from '@/sesame/Candidate/Application/create-candidate/CreateCandidateRequest'
 import type { Notification } from '@/sesame/Shared/Notifications/Application/Notification'
+import type { VacancyCandidateDTO } from '@/sesame/Candidate/Application/get-vacancy-candidates/VacancyCandidateDTO'
+import { UpdateCandidateRequest } from '@/sesame/Candidate/Application/update-candidate/UpdateCandidateRequest'
 
 const emit = defineEmits(['success'])
 const requestBus = inject(RequestBusKey)!
 
 interface Props {
+  candidate?: VacancyCandidateDTO
   candidateStatuses: VacancyCandidateStatusDTO[]
   vacancyId: string
 }
-const { candidateStatuses, vacancyId } = defineProps<Props>()
+const { candidateStatuses, vacancyId, candidate } = defineProps<Props>()
 // Data
-const selectedItem = ref<VacancyCandidateStatusDTO>()
-const firstName = ref<string>()
-const lastName = ref<string>()
+const selectedItem = ref<VacancyCandidateStatusDTO | undefined>(
+  candidateStatuses.find((status) => status.name === candidate?.status)
+)
+const firstName = ref<string>(candidate?.firstName ?? '')
+const lastName = ref<string>(candidate?.lastName ?? '')
 const notification = ref<Notification>()
 // Errors
 const firstNameError = ref<string>()
@@ -28,9 +33,23 @@ const lastNameError = ref<string>()
 const candidateStatusError = ref<string>()
 
 async function sendForm() {
-  notification.value = await requestBus.dispatch<Notification>(
-    new CreateCandidateRequest(firstName.value, lastName.value, vacancyId, selectedItem.value?.id)
+  let request = new CreateCandidateRequest(
+    firstName.value,
+    lastName.value,
+    vacancyId,
+    selectedItem.value?.id
   )
+  if (candidate) {
+    request = new UpdateCandidateRequest(
+      candidate.id,
+      firstName.value,
+      lastName.value,
+      vacancyId,
+      selectedItem.value?.id
+    )
+  }
+
+  notification.value = await requestBus.dispatch<Notification>(request)
 
   if (!notification.value.isError()) {
     resetForm()
@@ -46,14 +65,14 @@ async function sendForm() {
 }
 
 function resetForm() {
-  firstName.value = undefined
-  lastName.value = undefined
+  firstName.value = ''
+  lastName.value = ''
   selectedItem.value = undefined
 }
 </script>
 
 <template>
-  <form>
+  <form class="select-none">
     <div class="mb-3">
       <MInput v-model="firstName" placeholder="Nombre" :error="firstNameError" />
     </div>
@@ -76,7 +95,11 @@ function resetForm() {
       </ul>
     </div>
     <div class="text-right mb-2">
-      <AButton cta="Crear candidato" color="blue-marguerite" @click="sendForm" />
+      <AButton
+        :cta="candidate ? 'Actualizar candidato' : 'Crear candidato'"
+        color="blue-marguerite"
+        @click="sendForm"
+      />
     </div>
   </form>
 </template>
