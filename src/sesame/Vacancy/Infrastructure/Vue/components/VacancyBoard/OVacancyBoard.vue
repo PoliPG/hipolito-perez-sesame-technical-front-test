@@ -6,22 +6,20 @@ import OVacancyCandidateStatusCard from './OVacancyCandidateStatusCard.vue'
 interface Props {
   candidateStatuses: VacancyCandidateStatusDTO[]
   candidates: VacancyCandidateDTO[]
+  vacancyId: string
 }
 
-const { candidateStatuses, candidates } = defineProps<Props>()
-
-function getCandidatesByStatus(status: string): VacancyCandidateDTO[] {
-  return candidates.filter((candidate) => status === candidate.status)
-}
+const { candidateStatuses, candidates, vacancyId } = defineProps<Props>()
 </script>
 
 <template>
-  <div class="flex items-stretch gap-3 whitespace-nowrap overflow-x-scroll">
+  <div class="relative flex items-stretch gap-3 whitespace-nowrap overflow-x-scroll">
     <OVacancyCandidateStatusCard
       v-for="candidateStatus in candidateStatuses"
       :key="candidateStatus.id"
       :candidate-status="candidateStatus"
-      :candidates="getCandidatesByStatus(candidateStatus.name)"
+      :candidates="candidates"
+      :vacancyId="vacancyId"
     />
   </div>
 </template>

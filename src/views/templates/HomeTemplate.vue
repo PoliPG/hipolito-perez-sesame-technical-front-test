@@ -101,6 +101,7 @@ function closeCandidateModal() {
                 v-if="activeTab === 'vacancies'"
                 :candidate-statuses="candidateStatuses"
                 :candidates="candidates"
+                :vacancyId
               />
               <OCandidateList
                 :candidate-statuses="candidateStatuses"
