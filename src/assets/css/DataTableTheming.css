@@ -1,0 +1,13 @@
+#app {
+  --p-datatable-header-cell-border-color: #dae0f1;
+  --p-datatable-body-cell-border-color: #dae0f1;
+  --p-datatable-body-cell-padding: 12px;
+
+  .p-datatable-column-header-content {
+    @apply font-extrabold text-gray-700 p-2;
+  }
+
+  .p-datatable-table-container {
+    @apply rounded-lg;
+  }
+}

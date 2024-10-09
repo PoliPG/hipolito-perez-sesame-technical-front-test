@@ -8,6 +8,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import './assets/css/index.css'
+import './assets/css/DataTableTheming.css'
 import PrimeVue from 'primevue/config'
 
 const app = createApp(App)
