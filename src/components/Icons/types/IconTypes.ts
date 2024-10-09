@@ -10,3 +10,4 @@ export type Icons =
   | 'search'
   | 'clock'
   | 'vertical-dots'
+  | 'pencil'

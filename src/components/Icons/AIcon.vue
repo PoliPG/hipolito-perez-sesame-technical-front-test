@@ -28,6 +28,7 @@ function initMapper() {
   iconMap.set('search', defineAsyncComponent(() => import('./types/ASearchIcon.vue')))
   iconMap.set('clock', defineAsyncComponent(() => import('./types/AClockIcon.vue')))
   iconMap.set('vertical-dots', defineAsyncComponent(() => import('./types/AVerticalDotsIcon.vue')))
+  iconMap.set('pencil', defineAsyncComponent(() => import('./types/APencilIcon.vue')))
 }
 
 currentIcon.value = iconMap.get(icon) ?? null
