@@ -1,13 +1,13 @@
 import 'reflect-metadata'
-import { expect, test } from 'vitest'
-import type { VacancyRepository } from '../../Domain/VacancyRepository'
-import VacancyContainerTypes from '../../VacancyContainerTypes'
-import { InMemoryVacancyRepository } from '../../Infrastructure/InMemory/InMemoryVacancyRepository'
-import { GetVacancyCandidateStatusQuery } from '../get-vacancy-candidate-status/GetVacancyCandidateStatusQuery'
+import { assertType, expect, test } from 'vitest'
 import type { Handler } from '@/sesame/Shared/EventBus/Domain/Handler'
-import { GetVacancyCandidateStatusQueryHandler } from '../get-vacancy-candidate-status/GetVacancyCandidateStatusQueryHandler'
-import { VacancyCandidateStatusDTO } from '../get-vacancy-candidate-status/VacancyCandidateStatusDTO'
 import { Container } from 'inversify'
+import VacancyContainerTypes from '@/sesame/Vacancy/VacancyContainerTypes'
+import { InMemoryVacancyRepository } from '@/sesame/Vacancy/Infrastructure/InMemory/InMemoryVacancyRepository'
+import type { VacancyRepository } from '@/sesame/Vacancy/Domain/VacancyRepository'
+import { GetVacancyCandidateStatusQueryHandler } from '../GetVacancyCandidateStatusQueryHandler'
+import { GetVacancyCandidateStatusQuery } from '../GetVacancyCandidateStatusQuery'
+import { VacancyCandidateStatusDTO } from '../VacancyCandidateStatusDTO'
 
 const container = new Container()
 container
@@ -32,7 +32,7 @@ containerTest('Test use case get vacancy candidate status', async ({ container }
   const candidateStatus = await queryHandler.handle(query)
 
   //Assert
-  expect(candidateStatus[0] instanceof VacancyCandidateStatusDTO).toBe(true)
+  assertType<VacancyCandidateStatusDTO>(candidateStatus[0])
 })
 
 containerTest('Test use case get vacancy candidate status use vacancyID', async ({ container }) => {
