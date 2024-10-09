@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { defineAsyncComponent, ref } from 'vue'
 import type { VacancyCandidateStatusDTO } from '@/sesame/Vacancy/Application/get-vacancy-candidate-status/VacancyCandidateStatusDTO'
-import type { VacancyCandidateDTO } from '@/sesame/Candidate/Application/get-vacancy-candidates/VacancyCandidateDTO'
 import type { MenuItem } from '@/components/Menu/OMenuItem.vue'
 // Components
 import MHeader from '@/components/Header/MHeader.vue'
@@ -12,6 +11,7 @@ import OVacancyBoard from '@/sesame/Vacancy/Infrastructure/Vue/components/Vacanc
 import AButton from '@/components/Button/AButton.vue'
 import MInput from '@/components/Input/MInput.vue'
 import OModal from '@/components/Modal/OModal.vue'
+import type { VacancyCandidateDTO } from '@/sesame/Candidate/Application/get-vacancy-candidates/VacancyCandidateDTO'
 const OCandidateForm = defineAsyncComponent(
   () => import('@/sesame/Candidate/Infrastructure/Vue/components/OCandidateForm.vue')
 )
@@ -21,10 +21,10 @@ const OCandidateList = defineAsyncComponent(
 
 interface Props {
   candidateStatuses: VacancyCandidateStatusDTO[]
-  candidates: VacancyCandidateDTO[]
   vacancyId: string
+  candidates: VacancyCandidateDTO[]
 }
-const { candidateStatuses, candidates, vacancyId } = defineProps<Props>()
+const { candidateStatuses, vacancyId, candidates } = defineProps<Props>()
 
 let isMenuOpen = ref(false)
 let isModalOpen = ref(false)
