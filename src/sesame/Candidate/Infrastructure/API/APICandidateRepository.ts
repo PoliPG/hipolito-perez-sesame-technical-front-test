@@ -1,6 +1,10 @@
 import type { HttpConnection } from '@/sesame/Shared/Http/Domain/HttpConnection'
 import type { Candidate } from '../../Domain/Candidate'
-import type { CandidateRepository, CreateCandidateParams } from '../../Domain/CandidateRepository'
+import type {
+  CandidateRepository,
+  CreateCandidateParams,
+  UpdateCandidateParams
+} from '../../Domain/CandidateRepository'
 import { injectable, inject } from 'inversify'
 import HttpContainerTypes from '@/sesame/Shared/Http/HttpContainerTypes'
 import type { ApiCandidateDTO } from './DTO/APICandidateDTO'
@@ -54,14 +58,14 @@ export class APICandidateRepository implements CandidateRepository {
     return APICandidateMapper.createFromDTO(apiCandidate.data)
   }
 
-  async updateCandidate(candidate: Candidate): Promise<Candidate> {
-    const url = `/recruitment/v1/candidates/${candidate.id}`
+  async updateCandidate(params: UpdateCandidateParams): Promise<Candidate> {
+    const url = `/recruitment/v1/candidates/${params.candidateId}`
 
     const data = {
-      firstName: candidate.firstName,
-      lastName: candidate.lastName,
-      vacancyId: candidate.vacancy.id,
-      statusId: candidate.vacancyStatus.id
+      firstName: params.firstName,
+      lastName: params.lastName,
+      vacancyId: params.vacancyId,
+      statusId: params.vacancyCandidateStatusId
     }
 
     const apiCandidate = await this.backendHttpConnection.put<

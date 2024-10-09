@@ -7,8 +7,12 @@ export interface CreateCandidateParams {
   vacancyCandidateStatusId: string
 }
 
+export interface UpdateCandidateParams extends CreateCandidateParams {
+  candidateId: string
+}
+
 export interface CandidateRepository {
   findCandidatesByVacancyId(vacancyId: string): Promise<Candidate[]>
   createCandidate(candidate: CreateCandidateParams): Promise<Candidate>
-  updateCandidate(candidate: Candidate): Promise<Candidate>
+  updateCandidate(candidate: UpdateCandidateParams): Promise<Candidate>
 }

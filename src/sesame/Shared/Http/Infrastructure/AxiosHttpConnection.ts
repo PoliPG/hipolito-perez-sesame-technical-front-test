@@ -44,7 +44,7 @@ export default class AxiosHttpConnection implements HttpConnection {
   async put<T, B>(endpoint: string, body: B): Promise<T> {
     try {
       endpoint = this.removeSliceEndpoint(endpoint)
-      const response = await this.httpInstance.post(endpoint, body)
+      const response = await this.httpInstance.put(endpoint, body)
       return response.data
     } catch (e) {
       this.handleErrors(e)

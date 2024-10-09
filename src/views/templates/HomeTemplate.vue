@@ -12,7 +12,9 @@ import OVacancyBoard from '@/sesame/Vacancy/Infrastructure/Vue/components/Vacanc
 import AButton from '@/components/Button/AButton.vue'
 import MInput from '@/components/Input/MInput.vue'
 import OModal from '@/components/Modal/OModal.vue'
-import OCandidateForm from '@/sesame/Candidate/Infrastructure/Vue/components/OCandidateForm.vue'
+const OCandidateForm = defineAsyncComponent(
+  () => import('@/sesame/Candidate/Infrastructure/Vue/components/OCandidateForm.vue')
+)
 const OCandidateList = defineAsyncComponent(
   () => import('@/sesame/Candidate/Infrastructure/Vue/components/CandidateList/OCandidateList.vue')
 )
@@ -48,11 +50,11 @@ function toggleMenu(): void {
   isMenuOpen.value = !isMenuOpen.value
 }
 
-function openModal() {
+function NewCandidate() {
   isModalOpen.value = true
 }
 
-function closeModal() {
+function closeCandidateModal() {
   isModalOpen.value = false
 }
 </script>
@@ -92,27 +94,32 @@ function closeModal() {
                 <AButton
                   cta="Añadir candidato"
                   color="blue-marguerite"
-                  @click="openModal"
+                  @click="NewCandidate"
                 ></AButton>
               </div>
-              <div v-if="activeTab === 'vacancies'">
-                <OVacancyBoard :candidate-statuses="candidateStatuses" :candidates="candidates" />
-              </div>
-              <div v-else-if="activeTab === 'candidates'">
-                <OCandidateList :candidates="candidates" />
-              </div>
+              <OVacancyBoard
+                v-if="activeTab === 'vacancies'"
+                :candidate-statuses="candidateStatuses"
+                :candidates="candidates"
+              />
+              <OCandidateList
+                :candidate-statuses="candidateStatuses"
+                :vacancy-id="vacancyId"
+                v-else-if="activeTab === 'candidates'"
+                :candidates="candidates"
+              />
             </template>
           </MTabs>
         </div>
       </OCard>
     </div>
-    <OModal :is-open="isModalOpen" @close="closeModal">
+    <OModal :is-open="isModalOpen" @close="closeCandidateModal">
       <OCard icon="user" title="Nuevo candidato">
         <div class="w-64">
           <OCandidateForm
             :candidate-statuses="candidateStatuses"
             :vacancy-id="vacancyId"
-            @success="closeModal"
+            @success="closeCandidateModal"
           />
         </div>
       </OCard>

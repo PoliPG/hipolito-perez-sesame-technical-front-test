@@ -26,7 +26,6 @@ const selectedItem = defineModel()
     optionLabel="name"
     :placeholder="placeholder"
     unstyled
-    class=""
   />
 </template>
 

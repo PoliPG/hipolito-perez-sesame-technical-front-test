@@ -2,24 +2,25 @@ import type { Handler } from '@/sesame/Shared/EventBus/Domain/Handler'
 import { inject, injectable } from 'inversify'
 import CandidateContainerTypes from '../../CandidateContainerTypes'
 import type { CandidateRepository } from '../../Domain/CandidateRepository'
-import type { CreateCandidateRequest } from './CreateCandidateRequest'
 import { CreateCandidateValidator } from '../services/CreateCandidateValidator'
 import type { Notification } from '@/sesame/Shared/Notifications/Application/Notification'
+import type { UpdateCandidateRequest } from './UpdateCandidateRequest'
 import { ErrorNotification } from '@/sesame/Shared/Notifications/Application/ErrorNotification'
 
 @injectable()
-export class CreateCandidateRequestHandler implements Handler {
+export class UpdateCandidateRequestHandler implements Handler {
   constructor(
     @inject(CandidateContainerTypes.CandidateRepository)
     private candidateRepository: CandidateRepository
   ) {}
 
-  async handle(request: CreateCandidateRequest): Promise<Notification> {
+  async handle(request: UpdateCandidateRequest): Promise<Notification> {
     try {
       const notification = CreateCandidateValidator.validate(request)
       if (notification.isError()) return notification
 
-      await this.candidateRepository.createCandidate({
+      await this.candidateRepository.updateCandidate({
+        candidateId: request.candidateId!,
         firstName: request.firstName!,
         lastName: request.lastName!,
         vacancyCandidateStatusId: request.vacancyCandidateStatusId!,

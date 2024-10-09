@@ -9,20 +9,20 @@ import {
 } from '@/sesame/Shared/Notifications/Application/ErrorNotification'
 
 export class CreateCandidateValidator {
-  public static validate(candidate: CreateCandidateRequest): Notification {
+  public static validate(candidateRequest: CreateCandidateRequest): Notification {
     const errors: NotificationError[] = []
 
-    if (!candidate.firstName || candidate.firstName.trim().length === 0) {
+    if (!candidateRequest.firstName || candidateRequest.firstName.trim().length === 0) {
       errors.push({ id: 'first-name', message: 'El campo Nombre es requerido.' })
     }
 
-    if (!candidate.lastName || candidate.lastName.trim().length === 0) {
+    if (!candidateRequest.lastName || candidateRequest.lastName.trim().length === 0) {
       errors.push({ id: 'last-name', message: 'El campo Apellidos es requerido.' })
     }
 
     if (
-      !candidate.vacancyCandidateStatusId ||
-      candidate.vacancyCandidateStatusId.trim().length === 0
+      !candidateRequest.vacancyCandidateStatusId ||
+      candidateRequest.vacancyCandidateStatusId.trim().length === 0
     ) {
       errors.push({
         id: 'vacancy-candidate-status-id',
@@ -30,7 +30,7 @@ export class CreateCandidateValidator {
       })
     }
 
-    if (!candidate.vacancyId || candidate.vacancyId.trim().length === 0) {
+    if (!candidateRequest.vacancyId || candidateRequest.vacancyId.trim().length === 0) {
       errors.push({ id: 'vacancy-id', message: 'La vacante es requerida.' })
     }
 
