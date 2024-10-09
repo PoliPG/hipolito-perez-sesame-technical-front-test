@@ -4,14 +4,14 @@ export class VacancyCandidateDTO {
   readonly id: string
   readonly firstName: string
   readonly lastName: string
-  readonly status: string
+  readonly statusId: string
   readonly updatedAt: Date
 
   constructor(candidate: Candidate) {
     this.id = candidate.id
     this.firstName = candidate.firstName
     this.lastName = candidate.lastName
-    this.status = candidate.vacancyStatus.name
+    this.statusId = candidate.vacancyStatus.id
     this.updatedAt = candidate.updatedAt
   }
 
