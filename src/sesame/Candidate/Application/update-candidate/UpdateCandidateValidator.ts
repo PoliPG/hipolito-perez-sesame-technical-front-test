@@ -6,14 +6,14 @@ import {
   ErrorNotification,
   type NotificationError
 } from '@/sesame/Shared/Notifications/Application/ErrorNotification'
-import type { UpdateCandidateRequest } from '../update-candidate/UpdateCandidateRequest'
-import { CreateCandidateValidator } from './CreateCandidateValidator'
+import type { UpdateCandidateRequest } from './UpdateCandidateRequest'
+import { CreateCandidateRequestValidator } from '../create-candidate/CreateCandidateValidator'
 
-export class UpdateCandidateValidator {
+export class UpdateCandidateRequestValidator {
   public static validate(candidateRequest: UpdateCandidateRequest): Notification {
     const errors: NotificationError[] = []
 
-    const notification = CreateCandidateValidator.validate(candidateRequest)
+    const notification = CreateCandidateRequestValidator.validate(candidateRequest)
     if (notification.isError()) return notification
 
     if (!candidateRequest.candidateId || candidateRequest.candidateId.trim().length === 0) {

@@ -2,13 +2,13 @@ import {
   NotificationBase,
   type Notification
 } from '@/sesame/Shared/Notifications/Application/Notification'
-import type { CreateCandidateRequest } from '../create-candidate/CreateCandidateRequest'
+import type { CreateCandidateRequest } from './CreateCandidateRequest'
 import {
   ErrorNotification,
   type NotificationError
 } from '@/sesame/Shared/Notifications/Application/ErrorNotification'
 
-export class CreateCandidateValidator {
+export class CreateCandidateRequestValidator {
   public static validate(candidateRequest: CreateCandidateRequest): Notification {
     const errors: NotificationError[] = []
 

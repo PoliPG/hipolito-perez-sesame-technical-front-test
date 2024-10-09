@@ -5,7 +5,7 @@ import type { CandidateRepository } from '../../Domain/CandidateRepository'
 import type { Notification } from '@/sesame/Shared/Notifications/Application/Notification'
 import type { UpdateCandidateRequest } from './UpdateCandidateRequest'
 import { ErrorNotification } from '@/sesame/Shared/Notifications/Application/ErrorNotification'
-import { UpdateCandidateValidator } from '../services/UpdateCandidateValidator'
+import { UpdateCandidateRequestValidator } from './UpdateCandidateValidator'
 
 @injectable()
 export class UpdateCandidateRequestHandler implements Handler {
@@ -16,7 +16,7 @@ export class UpdateCandidateRequestHandler implements Handler {
 
   async handle(request: UpdateCandidateRequest): Promise<Notification> {
     try {
-      const notification = UpdateCandidateValidator.validate(request)
+      const notification = UpdateCandidateRequestValidator.validate(request)
       if (notification.isError()) return notification
 
       await this.candidateRepository.updateCandidate({
