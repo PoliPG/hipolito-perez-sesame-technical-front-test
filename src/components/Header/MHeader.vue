@@ -5,6 +5,12 @@ import ATitle from '../Title/ATitle.vue'
 
 const emit = defineEmits(['toggle-menu'])
 
+interface Props {
+  title: string
+}
+
+const { title } = defineProps<Props>()
+
 function toggleMenu(): void {
   emit('toggle-menu')
 }
@@ -14,7 +20,7 @@ function toggleMenu(): void {
   <header class="flex justify-between items-center px-3 md:px-0 py-3">
     <div class="flex items-center gap-2">
       <AIcon class="lg:hidden" icon="menu" @click="toggleMenu" />
-      <ATitle type="h1" text="Reclutamiento" />
+      <ATitle type="h1" :text="title" />
     </div>
     <AAvatar
       class="w-8 h-8"

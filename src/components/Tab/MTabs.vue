@@ -2,6 +2,8 @@
 import { ref, onMounted } from 'vue'
 import ATab from './ATab.vue'
 
+const emit = defineEmits(['change'])
+
 interface TabDTO {
   id: string
   default?: boolean
@@ -9,19 +11,22 @@ interface TabDTO {
 
 interface Props {
   tabs: TabDTO[]
+  activeId?: string
 }
 
-const { tabs } = defineProps<Props>()
+const { tabs, activeId } = defineProps<Props>()
 
 const activeTab = ref('')
 
 onMounted(() => {
-  const defaultTab = tabs.find((tab) => tab.default === true)
+  const activeParent = tabs.find((tab) => tab.id === activeId)
+  const defaultTab = activeParent ?? tabs.find((tab) => tab.default === true)
   if (defaultTab) activeTab.value = defaultTab.id
 })
 
 function setActiveTab(id: string): void {
   activeTab.value = id
+  emit('change', id)
 }
 </script>
 

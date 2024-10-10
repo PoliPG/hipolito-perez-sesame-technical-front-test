@@ -1,13 +1,27 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/pages/HomePage.vue'
+import Recruitment from '@/views/RecruitmentPage.vue'
+import OVacancyBoard from '@/sesame/Vacancy/Infrastructure/Vue/components/VacancyBoard/OVacancyBoard.vue'
+import OCandidateList from '@/sesame/Candidate/Infrastructure/Vue/components/CandidateList/OCandidateList.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView
+      name: 'recruitment',
+      component: Recruitment,
+      children: [
+        {
+          path: 'vacantes',
+          name: 'vacancy-recruitment',
+          component: OVacancyBoard
+        },
+        {
+          path: 'candidatos',
+          name: 'candidates-recruitment',
+          component: OCandidateList
+        }
+      ]
     }
   ]
 })

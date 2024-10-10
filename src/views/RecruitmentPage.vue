@@ -7,7 +7,7 @@ import { GetVacancyCandidatesQuery } from '@/sesame/Candidate/Application/get-va
 import type { VacancyCandidateDTO } from '@/sesame/Candidate/Application/get-vacancy-candidates/VacancyCandidateDTO'
 import { usePiniaCandidateStore } from '@/sesame/Candidate/Infrastructure/Pinia/PiniaCandidateStore'
 // Template
-import HomeTemplate from '../templates/HomeTemplate.vue'
+import RecruitmentTemplate from '@/components/Recruitment/RecruitmentTemplate.vue'
 const store = usePiniaCandidateStore()
 
 const vacancyId = 'c762067e-de1e-4706-9649-accad9dacb1b'
@@ -26,7 +26,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <HomeTemplate
+  <RecruitmentTemplate
     :candidate-statuses="candidateStatuses"
     :candidates="store.getCandidates"
     :vacancy-id="vacancyId"
