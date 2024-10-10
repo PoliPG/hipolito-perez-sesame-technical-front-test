@@ -3,11 +3,13 @@ import { defineStore } from 'pinia'
 
 interface State {
   candidates: VacancyCandidateDTO[]
+  candidateSearch: string
 }
 
 export const usePiniaCandidateStore = defineStore('candidate', {
   state: () => ({
-    candidates: [] as VacancyCandidateDTO[]
+    candidates: [] as VacancyCandidateDTO[],
+    candidateSearch: ''
   }),
   actions: {
     newCandidate(candidate: VacancyCandidateDTO): void {
@@ -23,11 +25,20 @@ export const usePiniaCandidateStore = defineStore('candidate', {
     },
     setCandidates(candidates: VacancyCandidateDTO[]): void {
       this.candidates = candidates
+    },
+    setCandidateSearch(search: string): void {
+      this.candidateSearch = search
     }
   },
   getters: {
     getCandidates: (state: State): VacancyCandidateDTO[] => {
-      return state.candidates
+      if (state.candidateSearch === '') return state.candidates
+      return state.candidates.filter((candidate) =>
+        candidate.firstName
+          .concat(candidate.lastName)
+          .toLocaleLowerCase()
+          .includes(state.candidateSearch.toLocaleLowerCase())
+      )
     }
   }
 })
