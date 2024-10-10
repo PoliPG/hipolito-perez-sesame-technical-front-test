@@ -22,7 +22,7 @@ interface Props {
 const { candidateStatuses, vacancyId, candidate } = defineProps<Props>()
 // Data
 const selectedItem = ref<VacancyCandidateStatusDTO | undefined>(
-  candidateStatuses.find((status) => status.name === candidate?.status)
+  candidateStatuses.find((status) => status.name === candidate?.status.name)
 )
 const firstName = ref<string>(candidate?.firstName ?? '')
 const lastName = ref<string>(candidate?.lastName ?? '')

@@ -40,7 +40,7 @@ function closeCandidateModal() {
   >
     <Column field="firstName" header="Nombre"></Column>
     <Column field="lastName" header="Apellidos"></Column>
-    <Column field="status" header="Estado"></Column>
+    <Column field="status.name" header="Estado"></Column>
     <Column field="updatedAt" header="Actualizado">
       <template #body="{ data: candidate }">
         <relative-time
