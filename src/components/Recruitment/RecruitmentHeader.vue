@@ -6,7 +6,7 @@ const emit = defineEmits(['new-candidate'])
 </script>
 
 <template>
-  <div class="flex justify-between mb-4">
+  <div class="flex flex-wrap justify-between gap-2 mb-4">
     <div class="min-w-56">
       <MInput
         :icon="{ name: 'search', color: 'text-[#94A3B8]' }"
