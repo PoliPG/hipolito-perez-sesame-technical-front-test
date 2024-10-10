@@ -20,7 +20,7 @@ const requestBus = inject(RequestBusKey)!
 const toast = useToast()
 
 const filterCandidates = computed(() => {
-  return candidates.filter((candidate) => candidateStatus.name === candidate.status)
+  return candidates.filter((candidate) => candidateStatus.id === candidate.status.id)
 })
 
 function onDragStart(event: DragEvent, candidate: VacancyCandidateDTO): void {
@@ -43,6 +43,7 @@ async function onDrop(event: DragEvent, status: VacancyCandidateStatusDTO): Prom
     })
     return
   }
+  if (status.id === candidate.status.id) return
   await updateCandidate(candidate, status)
 }
 

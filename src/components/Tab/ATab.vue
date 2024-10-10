@@ -24,7 +24,7 @@ function onClick(): void {
     :data-id="id"
     @click="onClick"
     @keypress="onClick"
-    class="border-white py-2 border-b-2 text-center leading-6 cursor-pointer"
+    class="border-white py-2 border-b-2 text-center leading-6 cursor-pointer select-none"
     :class="{ active: isActive }"
   >
     <slot></slot>

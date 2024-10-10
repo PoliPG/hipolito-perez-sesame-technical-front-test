@@ -13,13 +13,20 @@ import { CreateCandidateRequestHandler } from './Application/create-candidate/Cr
 import { CreateCandidateRequest } from './Application/create-candidate/CreateCandidateRequest'
 import { UpdateCandidateRequestHandler } from './Application/update-candidate/UpdateCandidateRequestHandler'
 import { UpdateCandidateRequest } from './Application/update-candidate/UpdateCandidateRequest'
+import { PiniaCandidateRepositoryDecorator } from './Infrastructure/Pinia/PiniaCandidateRepository'
 
 export class CandidateContainerModule extends ContainerModule {
   constructor() {
     super((bind: interfaces.Bind) => {
-      bind<CandidateRepository>(CandidateContainerTypes.CandidateRepository).to(
-        APICandidateRepository
+      bind<CandidateRepository>('HttpCandidateRepository').to(APICandidateRepository)
+      bind<CandidateRepository>(CandidateContainerTypes.CandidateRepository).toDynamicValue(
+        (context: interfaces.Context) => {
+          const htttpCandidateRepository =
+            context.container.get<CandidateRepository>('HttpCandidateRepository')
+          return new PiniaCandidateRepositoryDecorator(htttpCandidateRepository)
+        }
       )
+
       bind<Handler>(CandidateContainerTypes.GetVacancyCandidatesQueryHandler)
         .to(GetVacancyCandidatesQueryHandler)
         .inSingletonScope()
