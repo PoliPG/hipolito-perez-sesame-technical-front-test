@@ -21,7 +21,7 @@ function toggleMenu(): void {
   <main class="md:flex mx-auto px-2 w-full max-w-8xl">
     <div
       :class="{ hidden: !isMenuOpen }"
-      class="lg:block md:relative fixed inset-0 bg-gray-600 bg-opacity-60 menu"
+      class="lg:block md:relative z-40 fixed inset-0 bg-gray-600 bg-opacity-60 menu"
       @click="toggleMenu"
     >
       <OMenu
