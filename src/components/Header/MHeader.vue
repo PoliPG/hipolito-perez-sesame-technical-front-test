@@ -2,6 +2,7 @@
 import AAvatar from '../Avatar/AAvatar.vue'
 import AIcon from '../Icons/AIcon.vue'
 import ATitle from '../Title/ATitle.vue'
+import UserImage from '@/assets/img/user_avatar.jpeg'
 
 const emit = defineEmits(['toggle-menu'])
 
@@ -22,11 +23,6 @@ function toggleMenu(): void {
       <AIcon class="lg:hidden" icon="menu" @click="toggleMenu" />
       <ATitle type="h1" :text="title" />
     </div>
-    <AAvatar
-      class="w-8 h-8"
-      src="./src/assets/img/user_avatar.jpeg"
-      :lazy="false"
-      alt="User Avatar"
-    />
+    <AAvatar class="w-8 h-8" :src="UserImage" :lazy="false" alt="User Avatar" />
   </header>
 </template>
