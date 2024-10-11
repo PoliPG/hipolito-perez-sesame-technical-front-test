@@ -8,12 +8,12 @@ interface Props {
 }
 const { src, alt, lazy, height, width } = defineProps<Props>()
 
-const widthPx = width + 'px'
-const heightPx = height + 'px'
+const widthPx = width + 4 + 'px'
+const heightPx = height + 4 + 'px'
 </script>
 
 <template>
-  <div class="px-px container">
+  <div class="p-1 container">
     <img
       class="rounded-full overflow-hidden"
       :src="src"
@@ -30,24 +30,23 @@ const heightPx = height + 'px'
   width: v-bind(widthPx);
   height: v-bind(heightPx);
   clip-path: polygon(
-    35% 89%,
-    48% 91%,
-    64% 88%,
-    87% 65%,
-    92% 50%,
-    87% 31%,
-    79% 17%,
-    68% 9%,
-    55% 4%,
-    32% 3%,
-    19% 6%,
-    11% 16%,
-    2% 29%,
-    0 38%,
-    1% 49%,
-    6% 66%,
-    10% 74%,
-    18% 80%
+    36% 85%,
+    53% 92%,
+    67% 83%,
+    85% 64%,
+    85% 46%,
+    84% 29%,
+    78% 15%,
+    62% 12%,
+    45% 10%,
+    30% 8%,
+    19% 10%,
+    3% 23%,
+    0 33%,
+    4% 47%,
+    6% 65%,
+    14% 68%,
+    19% 78%
   );
 }
 </style>
