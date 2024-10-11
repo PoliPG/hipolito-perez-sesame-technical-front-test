@@ -23,7 +23,7 @@ ENV VITE_SESAME_API_URL=$SESAME_API_URL
 FROM base AS builder
 WORKDIR /app
 
-COPY package.json .
+COPY package*.json .
 RUN pnpm config set network-timeout 600000 -g && pnpm install
 COPY . .
 RUN pnpm run build
