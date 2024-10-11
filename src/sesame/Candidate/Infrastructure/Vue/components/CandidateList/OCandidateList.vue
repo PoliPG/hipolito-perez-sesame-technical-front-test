@@ -32,31 +32,38 @@ function closeCandidateModal() {
 </script>
 
 <template>
-  <DataTable
-    stripedRows
-    tableStyle="min-width: 50rem"
-    tableClass="text-gray-600 font-semibold"
-    :value="candidates"
-  >
-    <Column field="firstName" header="Nombre"></Column>
-    <Column field="lastName" header="Apellidos"></Column>
-    <Column field="status.name" header="Estado"></Column>
-    <Column field="updatedAt" header="Actualizado">
-      <template #body="{ data: candidate }">
-        <relative-time
-          class="first-letter:capitalize"
-          :datetime="candidate.updatedAt"
-        ></relative-time>
-      </template>
-    </Column>
-    <Column field="updatedAt" header="Opciones">
-      <template #body="{ data: candidate }">
-        <span class="hover:text-black transform cursor-pointer hover:scale-150">
-          <AIcon :height="22" :width="22" icon="pencil" @click="updateCandidate(candidate)"></AIcon>
-        </span>
-      </template>
-    </Column>
-  </DataTable>
+  <div class="border-gray-200 border border-b-0 rounded-lg overflow-hidden">
+    <DataTable
+      stripedRows
+      tableStyle="min-width: 50rem;"
+      tableClass="text-gray-600 font-semibold"
+      :value="candidates"
+    >
+      <Column field="firstName" header="Nombre"></Column>
+      <Column field="lastName" header="Apellidos"></Column>
+      <Column field="status.name" header="Estado"></Column>
+      <Column field="updatedAt" header="Actualizado">
+        <template #body="{ data: candidate }">
+          <relative-time
+            class="first-letter:capitalize"
+            :datetime="candidate.updatedAt"
+          ></relative-time>
+        </template>
+      </Column>
+      <Column field="updatedAt" header="Opciones">
+        <template #body="{ data: candidate }">
+          <span class="text-center hover:text-black cursor-pointer">
+            <AIcon
+              :height="22"
+              :width="22"
+              icon="pencil"
+              @click="updateCandidate(candidate)"
+            ></AIcon>
+          </span>
+        </template>
+      </Column>
+    </DataTable>
+  </div>
   <OModal :is-open="isModalOpen" @close="closeCandidateModal">
     <OCard icon="user" title="Actualizar candidato">
       <div class="w-64">
