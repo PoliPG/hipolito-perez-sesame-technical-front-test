@@ -1,18 +1,16 @@
-# hipolito-perez-sesame-technical-front-test
+# Sesame & Hipólito Pérez: Vacancy candidates app
 
-This template should help get you started developing with Vue 3 in Vite.
+Application developed for Sesame by Hipólito Pérez in Vue 3, Typescript and following SOLID patterns and hexagonal architecture.
 
-## Recommended IDE Setup
+## Create docker image
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+```sh
+docker build \
+    -t latest \
+    --build-arg SESAME_API_URL=$var \
+    --build-arg SESAME_API_TOKEN=$var \
+    vacancy_app
+```
 
 ## Project Setup
 
@@ -38,24 +36,10 @@ npm run build
 npm run test:unit
 ```
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
+## Recommended IDE Setup
 
-```sh
-npm run test:e2e:dev
-```
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
+## Type Support for `.vue` Imports in TS
 
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-npm run build
-npm run test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
