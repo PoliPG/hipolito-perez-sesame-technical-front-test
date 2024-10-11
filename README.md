@@ -6,10 +6,19 @@ Application developed for Sesame by Hipólito Pérez in Vue 3, Typescript and fo
 
 ```sh
 docker build \
-    -t latest \
+    -t vacancy-app:latest \
+    --build-arg PORT=$var \
     --build-arg SESAME_API_URL=$var \
     --build-arg SESAME_API_TOKEN=$var \
-    vacancy_app
+    .
+```
+
+## Create docker container
+
+```sh
+docker run \
+    -p 127.0.0.1:3000:$PORT \
+    vacancy-app
 ```
 
 ## Project Setup
