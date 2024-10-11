@@ -20,7 +20,6 @@ ENV VITE_SESAME_API_TOKEN=$SESAME_API_TOKEN
 ARG SESAME_API_URL
 ENV VITE_SESAME_API_URL=$SESAME_API_URL
  
- 
 FROM base AS builder
 WORKDIR /app
 
@@ -29,10 +28,11 @@ RUN pnpm config set network-timeout 600000 -g && pnpm install
 COPY . .
 RUN pnpm run build
 
+FROM nginx:stable-alpine AS runner
 
-FROM base AS runner
-COPY --from=builder /app/dist ./dist
-RUN pnpm i -g http-server
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE $PORT
-CMD [ "http-server", "dist" ]
+CMD ["nginx", "-g", "daemon off;"]
+
