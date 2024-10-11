@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, inject } from 'vue'
+import { computed, inject, ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
 import type { Notification } from '@/sesame/Shared/Notifications/Application/Notification'
 import { RequestBusKey } from '@/sesame/Shared/EventBus/Infrastructure/Vue/EventBusPlugin'
@@ -18,6 +18,7 @@ interface Props {
 const { candidateStatus, candidates, vacancyId } = defineProps<Props>()
 const requestBus = inject(RequestBusKey)!
 const toast = useToast()
+const isOverDrag = ref(false)
 
 const filterCandidates = computed(() => {
   return candidates.filter((candidate) => candidateStatus.id === candidate.status.id)
@@ -45,6 +46,7 @@ async function onDrop(event: DragEvent, status: VacancyCandidateStatusDTO): Prom
   }
   if (status.id === candidate.status.id) return
   await updateCandidate(candidate, status)
+  isOverDrag.value = false
 }
 
 async function updateCandidate(
@@ -91,15 +93,17 @@ async function updateCandidate(
     />
     <main
       :id="candidateStatus.id"
-      class="flex-grow overflow-y-auto"
+      class="flex-grow rounded-lg transition-colors duration-75 overflow-y-auto"
+      :class="{ dragOver: isOverDrag }"
       @drop="onDrop($event, candidateStatus)"
-      @dragenter.prevent
+      @dragenter.prevent="isOverDrag = true"
       @dragover.prevent
+      @dragleave="isOverDrag = false"
     >
       <div
         v-for="candidate in filterCandidates"
         :key="candidate.id"
-        class="cursor-grab active:cursor-grabbing"
+        class="mb-2 cursor-grab active:cursor-grabbing"
         draggable="true"
         @dragstart="onDragStart($event, candidate)"
       >
@@ -108,3 +112,9 @@ async function updateCandidate(
     </main>
   </section>
 </template>
+
+<style lang="postcss" scoped>
+.dragOver {
+  @apply bg-gray-10;
+}
+</style>
