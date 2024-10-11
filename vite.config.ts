@@ -16,6 +16,9 @@ export default defineConfig({
     }),
     vueDevTools()
   ],
+  build: {
+    outDir: 'dist' // Carpeta de salida
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
