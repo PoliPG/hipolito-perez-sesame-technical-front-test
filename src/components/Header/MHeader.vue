@@ -23,6 +23,6 @@ function toggleMenu(): void {
       <AIcon class="lg:hidden" icon="menu" @click="toggleMenu" />
       <ATitle type="h1" :text="title" />
     </div>
-    <AAvatar class="w-8 h-8" :src="UserImage" :lazy="false" alt="User Avatar" />
+    <AAvatar :width="32" :height="32" :src="UserImage" :lazy="false" alt="User Avatar" />
   </header>
 </template>
