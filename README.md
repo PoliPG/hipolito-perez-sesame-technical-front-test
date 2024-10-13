@@ -3,8 +3,7 @@
 Application developed for Sesame by Hipólito Pérez in Vue 3, Typescript and following SOLID patterns and hexagonal architecture.
 
 Links:
-- App Preview: https://hipolito-perez-sesame-technical-front-test-20fj93883.vercel.app/vacantes
-- App Production: https://hipolito-perez-sesame-technical-front-test-89d0rqlej.vercel.app
+- App: https://hipolito-perez-sesame-technical-front-test-20fj93883.vercel.app/vacantes
 
 ## Create docker image
 
