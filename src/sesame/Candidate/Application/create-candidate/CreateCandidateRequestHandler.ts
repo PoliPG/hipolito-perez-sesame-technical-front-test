@@ -25,6 +25,7 @@ export class CreateCandidateRequestHandler implements Handler {
         vacancyCandidateStatusId: request.vacancyCandidateStatusId!,
         vacancyId: request.vacancyId!
       })
+      notification.setMessage('Candidato creado correctamente.')
 
       return notification
     } catch (e) {

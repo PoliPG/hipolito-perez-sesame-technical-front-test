@@ -13,7 +13,9 @@ const { candidateStatuses, candidates, vacancyId } = defineProps<Props>()
 </script>
 
 <template>
-  <div class="relative flex items-stretch gap-3 whitespace-nowrap overflow-x-scroll">
+  <div
+    class="relative flex items-stretch gap-3 whitespace-nowrap overflow-x-scroll blue-marguerite-scrollbar"
+  >
     <OVacancyCandidateStatusCard
       v-for="candidateStatus in candidateStatuses"
       :key="candidateStatus.id"

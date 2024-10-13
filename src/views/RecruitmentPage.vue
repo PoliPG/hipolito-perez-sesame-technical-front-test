@@ -12,7 +12,6 @@ const store = usePiniaCandidateStore()
 
 const vacancyId = 'c762067e-de1e-4706-9649-accad9dacb1b'
 let candidateStatuses = ref<VacancyCandidateStatusDTO[]>([])
-let candidates = ref<VacancyCandidateDTO[]>([])
 const queryBus = inject(QueryBusKey)!
 
 const query = new GetVacancyCandidateStatusQuery(vacancyId)
@@ -21,7 +20,6 @@ candidateStatuses.value = await queryBus.dispatch<VacancyCandidateStatusDTO[]>(q
 onMounted(async () => {
   const candidatesQuery = new GetVacancyCandidatesQuery(vacancyId)
   await queryBus.dispatch<VacancyCandidateDTO[]>(candidatesQuery)
-  candidates.value = store.getCandidates
 })
 </script>
 

@@ -4,10 +4,14 @@
   --p-datatable-body-cell-padding: 12px;
 
   .p-datatable-column-header-content {
-    @apply font-extrabold text-gray-700 p-2;
+    @apply font-extrabold text-gray-700 p-1;
   }
 
   .p-datatable-table-container {
     @apply rounded-lg;
+  }
+
+  .p-datatable-tbody > tr > td {
+    @apply px-5;
   }
 }
