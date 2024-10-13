@@ -52,7 +52,7 @@ function closeCandidateModal() {
       </Column>
       <Column field="updatedAt" header="Opciones">
         <template #body="{ data: candidate }">
-          <span class="text-center hover:text-black cursor-pointer">
+          <span class="text-blue-marguerite-500 text-center hover:text-blue-700 cursor-pointer">
             <AIcon
               :height="22"
               :width="22"
