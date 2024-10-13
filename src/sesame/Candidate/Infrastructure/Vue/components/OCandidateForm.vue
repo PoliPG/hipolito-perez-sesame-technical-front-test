@@ -2,6 +2,7 @@
 import { RequestBusKey } from '@/sesame/Shared/EventBus/Infrastructure/Vue/EventBusPlugin'
 import type { VacancyCandidateStatusDTO } from '@/sesame/Vacancy/Application/get-vacancy-candidate-status/VacancyCandidateStatusDTO'
 import { inject, ref } from 'vue'
+import { useToast } from 'primevue/usetoast'
 // Component
 import AButton from '@/components/Button/AButton.vue'
 import ASelectInput from '@/components/Input/ASelectInput.vue'
@@ -13,6 +14,7 @@ import { UpdateCandidateRequest } from '@/sesame/Candidate/Application/update-ca
 
 const emit = defineEmits(['success'])
 const requestBus = inject(RequestBusKey)!
+const toast = useToast()
 
 interface Props {
   candidate?: VacancyCandidateDTO
@@ -52,6 +54,12 @@ async function sendForm() {
   notification.value = await requestBus.dispatch<Notification>(request)
 
   if (!notification.value.isError()) {
+    toast.add({
+      severity: 'success',
+      summary: 'Éxito',
+      detail: notification.value.message,
+      life: 3000
+    })
     resetForm()
     emit('success')
     return
