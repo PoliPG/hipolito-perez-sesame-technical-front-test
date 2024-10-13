@@ -1,7 +1,10 @@
 # Sesame & Hipólito Pérez: Vacancy candidates app
 
 Application developed for Sesame by Hipólito Pérez in Vue 3, Typescript and following SOLID patterns and hexagonal architecture.
-App: https://hipolito-perez-sesame-technical-front-test-20fj93883.vercel.app/vacantes
+
+Links:
+App Preview: https://hipolito-perez-sesame-technical-front-test-20fj93883.vercel.app/vacantes
+App Production: https://hipolito-perez-sesame-technical-front-test-89d0rqlej.vercel.app
 
 ## Create docker image
 
